@@ -13,11 +13,12 @@ private:
 	string email;
 	string phone;
 	int matricNum;
-	long int IC;
+	string IC;
 
 	
 public:
 	Student();
 	~Student();
+	Student(char, string, string, string, int, string);
 };
 #endif // !STUDENT_H

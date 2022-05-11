@@ -1,5 +1,7 @@
 #ifndef OPERATION_H
 #define OPERATION_H
+#include "Student.h"
+#include "Stay.h"
 
 using namespace std;
 
@@ -12,6 +14,8 @@ public:
 	~Operation();
 
 private:
+	Student student;
+	Date date;
 
 };
 

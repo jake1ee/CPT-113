@@ -1,7 +1,14 @@
 #include "Operation.h"
 #include<iostream>
+#include <fstream>
+#include <iomanip>
+#include <string>
 
 using namespace std;
+
+// limitations: all students accessible to this program are from the same course
+const double TUITION_FEE = 1130.00 // tuition fees
+const double DAILY_RATE = 3.50; //daily rate for room
 
 void Operation::Registration()
 {
@@ -26,10 +33,16 @@ void Operation::Registration()
 		break;
 	}
 }
-void Operation::CalculateFee() 
-{
 
+double Operation::CalculateFee() 
+{
+	int daysDorm = calcDays();
+	double totalfee;
+	totalfee = TUITION_FEE + (DAILY_RATE * daysDorm);
+	
+	return totalfee;	
 }
+
 int Operation::DesaMenu()
 {
 	int choices;
@@ -89,3 +102,78 @@ void Operation::InputMenu()
 
 	writeTxt(gender, name, email, phone, IC, matricNum, day, month, year);
 }
+
+int Operation::calcDays()
+{
+	string IC;
+	int line=0;
+	string line1 = " ";
+	string name = " ";
+	char gender = ' ';
+	int matricNum;
+	string icNum = " ";
+	string email = " ";
+	string phone = " ";
+	string desa = " ";
+	int day;
+	int month;
+	int year;
+	int daysDorm; //days from check in->check out(today)
+	Student student;
+	Date date;
+		
+	cout << "Input Identification Number: ";
+	cin >> IC;
+	
+	readInputTxt(); //read DesaStay.txt file
+
+	//if the file was successfully opened, continue.
+	if (datafile)
+	{
+		//read an item from the file
+		while(getline(datafile,line1))
+		{
+			numfile >> name >> gender >> matricNum >> icNum >>  email >> phone >>
+			day >> month >> year >> desa;
+			if (icNum == IC)
+			{
+				student.Student(gender, name, email, phone, matricNum, icNum);
+				date.Date(day, month, year);
+				
+				//calculate days 
+			} 
+			else
+			{
+				cout << "You are not registered in any desasiswa." << endl;
+				daysDorm = 0;
+			}
+		}
+		
+		//close the file
+		datafile.close();
+	}
+	else
+	{
+		cout << "ERROR: cannot open the file." << endl;
+	}
+	
+	return daysDorm;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

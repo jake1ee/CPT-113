@@ -27,7 +27,7 @@ void Stay::writeTxt(char &gender, string &name, string &email, string &phone, st
 		dataFile << phone << "\t";
 		dataFile << day << "/" << month << "/" << year << "\t";
 		dataFile << Desa;
-		cout << "Data has been write to the file" << endl;
+		cout << "Data has been written to the file" << endl;
 	}
 	else
 	{

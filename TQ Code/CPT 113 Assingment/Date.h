@@ -14,6 +14,9 @@ protected:
 public:
 	Date();
 	~Date();
+	Date(int, int, int);
+	void setDate(int, int, int);
+	void printDate();
 
 };
 #endif // !DATE_H
