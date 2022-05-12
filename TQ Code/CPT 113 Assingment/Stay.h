@@ -15,7 +15,7 @@ private:
 protected:
 	string Desa;
 public:
-	Stay( )
+	Stay()
 	{
 		cout << "Stay constructor call";
 		txtFiles = "DesaStay.txt";
@@ -23,7 +23,10 @@ public:
 	void readInputTxt();
 	void writeTxt(char&, string&, string&, string&, string&, int&, int&, int&, int&);
 
-
+	~Stay()
+	{
+		Desa=txtFiles=
+	}
 
 
 };

@@ -1,4 +1,4 @@
-#include "Operation.h"
+ #include "Operation.h"
 #include<iostream>
 #include <fstream>
 #include <iomanip>
@@ -7,7 +7,7 @@
 using namespace std;
 
 // limitations: all students accessible to this program are from the same course
-const double TUITION_FEE = 1130.00 // tuition fees
+const double TUITION_FEE = 1130.00; // tuition fees
 const double DAILY_RATE = 3.50; //daily rate for room
 
 void Operation::Registration()
@@ -115,9 +115,15 @@ int Operation::calcDays()
 	string email = " ";
 	string phone = " ";
 	string desa = " ";
-	int day;
-	int month;
-	int year;
+	int day1;
+	int month1;
+	int year1;
+	int day2;
+	int month2;
+	int year2;
+	string d = " day ";
+	string m = " month ";
+	string y = " year ";
 	int daysDorm; //days from check in->check out(today)
 	Student student;
 	Date date;
@@ -125,6 +131,7 @@ int Operation::calcDays()
 	cout << "Input Identification Number: ";
 	cin >> IC;
 	
+	fstream datafile;
 	readInputTxt(); //read DesaStay.txt file
 
 	//if the file was successfully opened, continue.
@@ -133,14 +140,16 @@ int Operation::calcDays()
 		//read an item from the file
 		while(getline(datafile,line1))
 		{
-			numfile >> name >> gender >> matricNum >> icNum >>  email >> phone >>
-			day >> month >> year >> desa;
+			datafile >> name >> gender >> matricNum >> icNum >>  email >> phone >>
+			day1 >> month1 >> year1 >> desa;
 			if (icNum == IC)
 			{
-				student.Student(gender, name, email, phone, matricNum, icNum);
-				date.Date(day, month, year);
-				
-				//calculate days 
+				student.setStudent(gender, name, email, phone, matricNum, icNum);
+				day2 = checkoutDate(d);
+				month2 = checkoutDate(m);
+				year2 = checkoutDate(y);
+				date.setDate (day1, month1, year1, day2, month2, year2);
+				daysDorm = date.getNumDays();
 			} 
 			else
 			{
@@ -160,7 +169,16 @@ int Operation::calcDays()
 	return daysDorm;
 }
 
-
+//function to prompt user to input checkout day, month, year 
+//used in calcDays function
+int Operation::checkoutDate(string a)
+{
+	int date;
+	cout << "Enter checkout" << a << ": ";
+	cin >> date;
+	
+	return date; 
+}
 
 
 

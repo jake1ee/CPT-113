@@ -15,10 +15,11 @@ private:
 	int matricNum;
 	string IC;
 
-	
 public:
 	Student();
 	~Student();
 	Student(char, string, string, string, int, string);
+	void setStudent(char, string, string, string, int, string);
+	friend class Operation;
 };
 #endif // !STUDENT_H

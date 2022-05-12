@@ -71,7 +71,6 @@ void displayStart() //display choices for users to choose.
 		break;
 	}
 	} while (choice != 3);
-	
 }
 
 
