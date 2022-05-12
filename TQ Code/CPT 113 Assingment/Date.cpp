@@ -4,38 +4,53 @@
 
 Date::Date()
 {
-	dt1=dt2={0,0,0};
+	CheckIn=CheckOut={0,0,0};
 }
 
 Date::Date(int d1, int m1, int y1, int d2, int m2, int y2) //alternate constructor
 {
-	dt1.d = d1;
-	dt1.m = m1;
-	dt1.y = y1;
-	dt2.d = d2;
-	dt2.m = m2;
-	dt2.y = y2;
-//	checkValidity();
+	CheckIn.d = d1;
+	CheckIn.m = m1;
+	CheckIn.y = y1;
+	CheckOut.d = d2;
+	CheckOut.m = m2;
+	CheckOut.y = y2;
+	checkValidity();
 }
 
 void Date::setDate(int d1, int m1, int y1, int d2, int m2, int y2) //set values of dates
 {
-	dt1.d = d1;
-	dt1.m = m1;
-	dt1.y = y1;
-	dt2.d = d2;
-	dt2.m = m2;
-	dt2.y = y2;
+	CheckIn.d = d1;
+	CheckIn.m = m1;
+	CheckIn.y = y1;
+	CheckOut.d = d2;
+	CheckOut.m = m2;
+	CheckOut.y = y2;
+    checkValidity();
 }
 
-//void Date::checkValidity()
-//{
-//	if (day>28)
-//	{
-//		month += day % 28;
-//		day /= 28;
-//	}
-//}
+void Date::checkValidity()
+{
+    if (CheckIn.m > 12)
+    {
+        CheckIn.y++;
+    }
+    while (CheckIn.d > monthDays[CheckIn.m - 1])
+    {
+        CheckIn.d -= monthDays[CheckIn.m - 1];
+        CheckIn.m++;
+    }
+
+    if (CheckOut.m > 12)
+    {
+        CheckOut.y++;
+    }
+    while (CheckOut.d > monthDays[CheckOut.m - 1])
+    {
+        CheckOut.d -= monthDays[CheckOut.m - 1];
+        CheckOut.m++;
+    }
+}
 
 int Date::getNumDays()
 {
@@ -46,6 +61,7 @@ int Date::getNumDays()
 // leap years before the given date
 int Date::countLeapYears(DateFormat d)
 {
+    checkValidity();
     int years = d.y;
  
     // Check if the current year needs to be
@@ -60,24 +76,25 @@ int Date::countLeapYears(DateFormat d)
 }
  
 // This function returns number of days between two given dates
-int Date::getDifference(DateFormat dt1, DateFormat dt2)
+int Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
 {
-    // COUNT TOTAL NUMBER OF DAYS BEFORE FIRST DATE 'dt1'
+    checkValidity();
+    // COUNT TOTAL NUMBER OF DAYS BEFORE FIRST DATE 'CheckIn'
     // initialize count using years and day
-    int n1 = dt1.y * 365 + dt1.d;
+    int n1 = CheckIn.y * 365 + CheckIn.d;
  
     // Add days for months in given date
-    for (int i = 0; i < dt1.m - 1; i++)
+    for (int i = 0; i < CheckIn.m - 1; i++)
         n1 += monthDays[i];
  
     // Since every leap year is of 366 days, add a day for every leap year
-    n1 += countLeapYears(dt1);
+    n1 += countLeapYears(CheckIn);
  
-    // COUNT TOTAL NUMBER OF DAYS BEFORE 'dt2'
-    int n2 = dt2.y * 365 + dt2.d;
-    for (int i = 0; i < dt2.m - 1; i++)
+    // COUNT TOTAL NUMBER OF DAYS BEFORE 'CheckOut'
+    int n2 = CheckOut.y * 365 + CheckOut.d;
+    for (int i = 0; i < CheckOut.m - 1; i++)
         n2 += monthDays[i];
-    n2 += countLeapYears(dt2);
+    n2 += countLeapYears(CheckOut);
  
     // return difference between two counts
     return (n2 - n1);

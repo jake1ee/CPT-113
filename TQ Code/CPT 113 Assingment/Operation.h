@@ -9,13 +9,11 @@ class Operation:public Stay
 {
 public:
 	void Registration();
-	double CalculateFee();
-	int checkoutDate(string);
+	void CalculateFee();
+	void checkDate(int&, int&, int&);
 	int calcDays();
 	void InputMenu();
 	int DesaMenu();
-	Operation();
-	~Operation();
 
 private:
 	Student student;

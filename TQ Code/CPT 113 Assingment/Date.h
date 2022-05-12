@@ -13,18 +13,16 @@ struct DateFormat{
 class Date
 {
 protected:
-	DateFormat dt1; //check in date
-	DateFormat dt2; //check out date
-	int NumDays = getDifference(dt1, dt2);
-	
+	DateFormat CheckIn; //check in date
+	DateFormat CheckOut; //check out date
+	int NumDays = getDifference(CheckIn, CheckOut);
 	void checkValidity();
 public:
 	Date();
-	~Date();
 	Date(int, int, int, int, int, int);
 	void setDate(int, int, int, int, int, int);
 	int getNumDays();
 	int countLeapYears(DateFormat d);
-	int getDifference(DateFormat dt1, DateFormat dt2);
+	int getDifference(DateFormat CheckIn, DateFormat CheckOut);
 };
 #endif // !DATE_H

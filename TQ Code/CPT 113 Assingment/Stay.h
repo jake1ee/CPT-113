@@ -10,23 +10,11 @@ class Student;
 class Stay
 {
 private:
-	Student *student[20];
-	string txtFiles;
+	Student* student;
 protected:
 	string Desa;
 public:
-	Stay()
-	{
-		cout << "Stay constructor call";
-		txtFiles = "DesaStay.txt";
-	}
-	void readInputTxt();
 	void writeTxt(char&, string&, string&, string&, string&, int&, int&, int&, int&);
-
-	~Stay()
-	{
-		Desa=txtFiles=
-	}
 
 
 };

@@ -13,34 +13,7 @@ void displayStart();
 //main 
 int main()
 {
-	int choice; //user's choice whether to choose 1/2/3
 	displayStart();
-	cin >> choice;
-	while (choice!=3)
-	{
-		if (choice==1)
-		{
-			//register function
-			displayStart();
-			cin >> choice;
-		}
-		
-		else if (choice==2)
-		{
-			//fee function
-			displayStart();
-			cin >> choice;
-		}
-		
-		//if user enter any other number than 1-3 then will prompt error
-		else if (choice >3 || choice <1) 
-		{
-			cout << "\nInvalid choice." << endl;
-			displayStart();
-			cin >> choice;
-		}
-	}
-	
 	return 0;
 }
 
@@ -62,10 +35,13 @@ void displayStart() //display choices for users to choose.
 	{
 	case 1:
 		operation.Registration();
+		break;
 	case 2:
 		operation.CalculateFee();
+		break;
 	case 3:
 		cout << "Exit Program Thankyou for using this program." << endl;
+		break;
 	default:
 		cout << "Invalid Choice Please Enter Again\n" << endl;
 		break;

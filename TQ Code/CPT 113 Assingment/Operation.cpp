@@ -1,5 +1,6 @@
  #include "Operation.h"
 #include<iostream>
+#include<iomanip>
 #include <fstream>
 #include <iomanip>
 #include <string>
@@ -34,13 +35,16 @@ void Operation::Registration()
 	}
 }
 
-double Operation::CalculateFee() 
+void Operation::CalculateFee() 
 {
 	int daysDorm = calcDays();
 	double totalfee;
 	totalfee = TUITION_FEE + (DAILY_RATE * daysDorm);
 	
-	return totalfee;	
+	system("cls");
+	student.displayData();
+	cout << fixed << setprecision(2) << endl;
+	cout << "Fee: RM" << totalfee << endl;
 }
 
 int Operation::DesaMenu()
@@ -79,8 +83,13 @@ void Operation::InputMenu()
 	cin.get();
 	cout << "Name: ";
 	getline(cin, name);
+
+	do
+	{
 	cout << "Gender(M/F): ";
 	cin >> gender;
+	} while (gender != 'M' && gender != 'F');
+	
 	cin.get();
 	cout << "Email: ";
 	getline(cin, email);
@@ -91,75 +100,87 @@ void Operation::InputMenu()
 	cin.get();
 	cout << "IC Number: ";
 	getline(cin, IC);
-
+	
+	do
+	{
 	cout << "CheckIn Date: " << endl;
-	cout << "Year: ";
-	cin >> year;
-	cout << "Month: ";
-	cin >> month;
-	cout << "Day: ";
-	cin >> day;
+	checkDate(day, month, year);
+	} while ((month < 0 || month>12) || day < 0);
+	
 
 	writeTxt(gender, name, email, phone, IC, matricNum, day, month, year);
 }
 
 int Operation::calcDays()
 {
-	string IC;
-	int line=0;
-	string line1 = " ";
-	string name = " ";
 	char gender = ' ';
-	int matricNum;
+	bool regis = false;
+
+	string IC;
+	string skip = " ";
+	string name = " ";
 	string icNum = " ";
 	string email = " ";
 	string phone = " ";
 	string desa = " ";
+
+	int matricNum;
+
 	int day1;
 	int month1;
 	int year1;
+
 	int day2;
 	int month2;
 	int year2;
-	string d = " day ";
-	string m = " month ";
-	string y = " year ";
-	int daysDorm; //days from check in->check out(today)
-	Student student;
-	Date date;
+
+
+	int daysDorm = 0; //days from check in->check out(today)
 		
 	cout << "Input Identification Number: ";
 	cin >> IC;
 	
-	fstream datafile;
-	readInputTxt(); //read DesaStay.txt file
+	fstream dataFile;
+	dataFile.open("DesaStay2.txt", ios::in); //read DesaStay.txt file
 
 	//if the file was successfully opened, continue.
-	if (datafile)
+	if (dataFile)
 	{
 		//read an item from the file
-		while(getline(datafile,line1))
+		while(!dataFile.eof())
 		{
-			datafile >> name >> gender >> matricNum >> icNum >>  email >> phone >>
-			day1 >> month1 >> year1 >> desa;
-			if (icNum == IC)
+			getline(dataFile, name, '\t');
+			dataFile.get(gender);
+			getline(dataFile, skip, '\t');
+			dataFile >> matricNum;
+			getline(dataFile, skip, '\t');
+			getline(dataFile, icNum, '\t');
+			getline(dataFile, email, '\t');
+			getline(dataFile, phone, '\t');
+			dataFile >> day1;
+			getline(dataFile, skip, '/');
+			dataFile >> month1;
+			getline(dataFile, skip, '/');
+			dataFile >> year1;
+			getline(dataFile, skip, '\t');
+			getline(dataFile, desa);
+
+			student.setStudent(gender, name, email, phone, matricNum, icNum);
+			if (student == IC)
 			{
-				student.setStudent(gender, name, email, phone, matricNum, icNum);
-				day2 = checkoutDate(d);
-				month2 = checkoutDate(m);
-				year2 = checkoutDate(y);
+				cout << "Check Out Date: " << endl;
+				checkDate(day2, month2, year2);
 				date.setDate (day1, month1, year1, day2, month2, year2);
 				daysDorm = date.getNumDays();
+				regis = true;
+				break;
 			} 
-			else
-			{
-				cout << "You are not registered in any desasiswa." << endl;
-				daysDorm = 0;
-			}
-		}
+		}				
+		if (!regis)
+			cout << "You are not registered in any desasiswa." << endl;
 		
 		//close the file
-		datafile.close();
+		dataFile.close();
 	}
 	else
 	{
@@ -169,17 +190,18 @@ int Operation::calcDays()
 	return daysDorm;
 }
 
+
 //function to prompt user to input checkout day, month, year 
 //used in calcDays function
-int Operation::checkoutDate(string a)
+void Operation::checkDate(int& day, int& month, int& year)
 {
-	int date;
-	cout << "Enter checkout" << a << ": ";
-	cin >> date;
-	
-	return date; 
+	cout << "Year: ";
+	cin >> year;
+	cout << "Month: ";
+	cin >> month;
+	cout << "Day: ";
+	cin >> day;
 }
-
 
 
 
