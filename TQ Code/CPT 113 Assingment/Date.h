@@ -15,14 +15,13 @@ class Date
 protected:
 	DateFormat CheckIn; //check in date
 	DateFormat CheckOut; //check out date
-	int NumDays = getDifference(CheckIn, CheckOut);
+	int NumDays;
 	void checkValidity();
 public:
 	Date();
 	Date(int, int, int, int, int, int);
 	void setDate(int, int, int, int, int, int);
 	int getNumDays();
-	int countLeapYears(DateFormat d);
-	int getDifference(DateFormat CheckIn, DateFormat CheckOut);
+	void getDifference(DateFormat CheckIn, DateFormat CheckOut);
 };
 #endif // !DATE_H
