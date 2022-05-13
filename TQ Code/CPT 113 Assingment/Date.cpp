@@ -96,7 +96,6 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
     }
     else if (CheckOut.y == CheckIn.y)
     {
-        cout << "InMonth" << endl;
         if (CheckIn.m == CheckOut.m)
         {
             NumDays = CheckOut.d - CheckIn.d;
@@ -114,11 +113,10 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
             cout << "CheckOut Month is Small Than CheckIn Month" << endl;
             exit(EXIT_FAILURE);
         }
-        cout << NumDays;
     }   
     else
     {
-        cout << "In Day" << endl;
+        cout << "Check Out Year Error" << endl;
         exit(EXIT_FAILURE);
     }
     }

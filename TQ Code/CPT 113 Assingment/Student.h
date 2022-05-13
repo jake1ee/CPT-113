@@ -3,6 +3,7 @@
 #include<string>
 #include"Stay.h"
 
+
 using namespace std;
 
 class Student
@@ -20,8 +21,7 @@ public:
 	~Student();
 	Student(char, string, string, string, int, string);
 	void setStudent(char, string, string, string, int, string);
-	void displayData();
+	friend void Stay::displayData(const Student);
 	bool operator==(string&);
-	friend class Operation;
 };
 #endif // !STUDENT_H

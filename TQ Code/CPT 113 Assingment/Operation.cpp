@@ -41,9 +41,10 @@ void Operation::CalculateFee()
 	double totalfee;
 	totalfee = TUITION_FEE + (DAILY_RATE * daysDorm);
 	
-	//system("cls");
-	cout << daysDorm;
-	student.displayData();
+	system("cls");
+
+	displayData(student);
+	cout << "Num Day Stay: " << daysDorm << " Days" << endl;
 	cout << fixed << setprecision(2) << endl;
 	cout << "Fee: RM" << totalfee << endl;
 }
@@ -187,7 +188,6 @@ int Operation::calcDays()
 	{
 		cout << "ERROR: cannot open the file." << endl;
 	}
-	cout << daysDorm << endl;
 	return daysDorm;
 }
 
@@ -203,18 +203,3 @@ void Operation::checkDate(int& day, int& month, int& year)
 	cout << "Day: ";
 	cin >> day;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

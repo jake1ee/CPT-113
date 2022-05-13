@@ -32,16 +32,6 @@ void Student::setStudent(char gender, string name, string email, string phone, i
 	this->IC = ic;
 }
 
-void Student::displayData()
-{
-	cout << "Name: " << name << endl;
-	cout << "Gender: " << gender << endl;
-	cout << "Matric Num: " << matricNum << endl;
-	cout << "IC: " << IC << endl;
-	cout << "Email: " << email << endl;
-	cout << "Phone: " << phone << endl;
-}
-
 bool Student::operator==(string& IC)
 {
 	if (this->IC != IC)

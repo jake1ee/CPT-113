@@ -1,4 +1,5 @@
 #include "Stay.h"
+#include "Student.h"
 #include<iostream>
 #include<fstream>
 
@@ -33,3 +34,12 @@ void Stay::writeTxt(char &gender, string &name, string &email, string &phone, st
 	dataFile.close();
 }
 
+void Stay::displayData(const Student info)
+{
+	cout << "Name: " << info.name << endl;
+	cout << "Gender: " << info.gender << endl;
+	cout << "Matric Num: " << info.matricNum << endl;
+	cout << "IC: " << info.IC << endl;
+	cout << "Email: " << info.email << endl;
+	cout << "Phone: " << info.phone << endl;
+}
