@@ -5,7 +5,7 @@
 
 using namespace std;
 
-
+//This function is to write student info into txt file
 void Stay::writeTxt(char &gender, string &name, string &email, string &phone, string &IC, int &matricNum, int &day, int &month, int &year)
 {
 	fstream dataFile;
@@ -23,7 +23,7 @@ void Stay::writeTxt(char &gender, string &name, string &email, string &phone, st
 		dataFile << day << "/" << month << "/" << year << "\t";
 		dataFile << Desa;
 		system("cls");
-		cout << "Data has been written to the file" << endl;
+		cout << "Registered Successfully!" << endl;
 	}
 	else
 	{
@@ -34,12 +34,16 @@ void Stay::writeTxt(char &gender, string &name, string &email, string &phone, st
 	dataFile.close();
 }
 
+//This function is to print info for students that are staying in desa
 void Stay::displayData(const Student info)
 {
-	cout << "Name: " << info.name << endl;
-	cout << "Gender: " << info.gender << endl;
-	cout << "Matric Num: " << info.matricNum << endl;
-	cout << "IC: " << info.IC << endl;
-	cout << "Email: " << info.email << endl;
-	cout << "Phone: " << info.phone << endl;
+	cout << "------------------------------------------------" << endl;
+	cout << "Personal Information: " << endl;
+	cout << "Name: \t\t" << info.name << endl;
+	cout << "Gender: \t" << info.gender << endl;
+	cout << "Matric Num: \t" << info.matricNum << endl;
+	cout << "IC: \t\t" << info.IC << endl;
+	cout << "Email: \t\t" << info.email << endl;
+	cout << "Phone: \t\t" << info.phone << endl;
+	cout << "------------------------------------------------" << endl;
 }

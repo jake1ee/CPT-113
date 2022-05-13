@@ -12,6 +12,8 @@ class Stay
 protected:
 	string Desa;
 public:
+	Stay() { Desa = ""; } //constructor
+	~Stay() { Desa = ""; } //destructor
 	void writeTxt(char&, string&, string&, string&, string&, int&, int&, int&, int&);
 	void displayData(const Student);
 };

@@ -11,6 +11,7 @@ using namespace std;
 const double TUITION_FEE = 1130.00; // tuition fees
 const double DAILY_RATE = 3.50; //daily rate for room
 
+//This function is to prompt user to choose desasiswa
 void Operation::Registration()
 {
 	int desa = DesaMenu();
@@ -35,6 +36,7 @@ void Operation::Registration()
 	}
 }
 
+//This function is to calculates fees for student
 void Operation::CalculateFee() 
 {
 	int daysDorm = calcDays();
@@ -44,23 +46,25 @@ void Operation::CalculateFee()
 	system("cls");
 
 	displayData(student);
-	cout << "Num Day Stay: " << daysDorm << " Days" << endl;
+	cout << "Days in dorm: " << daysDorm << " Days" << endl;
 	cout << fixed << setprecision(2) << endl;
-	cout << "Fee: RM" << totalfee << endl;
+	cout << "Fee: \t\tRM" << totalfee << endl;
 }
 
+//This function is to display desa choices and prompt user input
 int Operation::DesaMenu()
 {
 	int choices;
 
 	do
 	{
-	cout << "Please Select Desasiswa to Register:" << endl;
+	cout << "\nPlease Select Desasiswa to Register:" << endl;
 	cout << "1. Restu\n2. Tekun\n3. Aman Damai\n" << endl;
+	cout << "Choices: ( 1 / 2 / 3 ): ";
 	cin >> choices;
 	if (choices > 3 || choices < 1)
 	{
-		cout << "Invalid Output Please Enter Again." << endl;
+		cout << "Invalid Output -- Please Enter Again." << endl;
 	}
 	} while (choices>3||choices<1);
 
@@ -68,6 +72,7 @@ int Operation::DesaMenu()
 	
 }
 
+//This function is to prompt user to input personal details
 void Operation::InputMenu()
 {
 	char gender;
@@ -80,7 +85,8 @@ void Operation::InputMenu()
 	int day;
 	int month;
 	int year;
-
+	
+	cout << "------------------------------------------------" << endl;
 	cout << "Please Enter Your Personal Information:" << endl;
 	cin.get();
 	cout << "Name: ";
@@ -88,23 +94,24 @@ void Operation::InputMenu()
 
 	do
 	{
-	cout << "Gender(M/F): ";
+	cout << "Gender ( M / F ): ";
 	cin >> gender;
 	} while (gender != 'M' && gender != 'F');
 	
 	cin.get();
-	cout << "Email: ";
+	cout << "Email (Exp: abcd123@gmail.com): ";
 	getline(cin, email);
-	cout << "Phone Number: ";
+	cout << "Phone Number (Exp: 012-2347288): ";
 	getline(cin, phone);
-	cout << "Matric Number(Exp:159389): ";
+	cout << "Matric Number (Exp: 159389): ";
 	cin >> matricNum;
 	cin.get();
-	cout << "IC Number: ";
+	cout << "IC Number (Exp: 011231-02-5678): ";
 	getline(cin, IC);
 	
 	do
 	{
+	cout << "\n------------------------------------------------" << endl;
 	cout << "CheckIn Date: " << endl;
 	checkDate(day, month, year);
 	} while ((month < 0 || month>12) || day < 0);
@@ -113,6 +120,7 @@ void Operation::InputMenu()
 	writeTxt(gender, name, email, phone, IC, matricNum, day, month, year);
 }
 
+//This function is to calculate days stayed in dorm
 int Operation::calcDays()
 {
 	char gender = ' ';
@@ -138,7 +146,8 @@ int Operation::calcDays()
 
 
 	int daysDorm = 0; //days from check in->check out(today)
-		
+
+	cout << "------------------------------------------------" << endl;
 	cout << "Input Identification Number: ";
 	cin >> IC;
 	
@@ -168,7 +177,7 @@ int Operation::calcDays()
 			getline(dataFile, desa);
 
 			student.setStudent(gender, name, email, phone, matricNum, icNum);
-			if (student == IC)
+			if (student == IC) //operator overloading
 			{
 				cout << "Check Out Date: " << endl;
 				checkDate(day2, month2, year2);
@@ -179,8 +188,10 @@ int Operation::calcDays()
 			} 
 		}				
 		if (!regis)
-			cout << "You are not registered in any desasiswa." << endl;
-		
+		{
+			cout << "You are not registered in any desasiswa!" << endl;
+		}
+
 		//close the file
 		dataFile.close();
 	}
@@ -192,7 +203,7 @@ int Operation::calcDays()
 }
 
 
-//function to prompt user to input checkout day, month, year 
+//This function is to prompt user to input checkout day, month, year 
 //used in calcDays function
 void Operation::checkDate(int& day, int& month, int& year)
 {

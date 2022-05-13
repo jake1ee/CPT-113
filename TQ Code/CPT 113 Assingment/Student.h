@@ -17,11 +17,11 @@ private:
 	string IC;
 
 public:
-	Student();
-	~Student();
-	Student(char, string, string, string, int, string);
+	Student(); //constructor
+	~Student(); //destructor
+	Student(char, string, string, string, int, string); //alternate constructor
 	void setStudent(char, string, string, string, int, string);
-	friend void Stay::displayData(const Student);
-	bool operator==(string&);
+	friend void Stay::displayData(const Student); //friend
+	bool operator==(string&); //operator overloading
 };
 #endif // !STUDENT_H

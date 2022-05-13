@@ -4,7 +4,8 @@
 
 using namespace std;
 
-Student::Student()
+//constructor
+Student::Student() 
 {
 	gender=0;
 	name=email=phone="";
@@ -12,6 +13,16 @@ Student::Student()
 	IC="";
 }
 
+//destructor
+Student::~Student()
+{
+	gender = 0;
+	name = email = phone = "";
+	matricNum = 0;
+	IC = "";
+}
+
+//alternate constructor
 Student::Student(char gender, string name, string email, string phone, int matNum, string ic)
 {
 	this->gender = gender;
@@ -22,6 +33,7 @@ Student::Student(char gender, string name, string email, string phone, int matNu
 	this->IC = ic;
 }
 
+//This function sets value for student's personal information
 void Student::setStudent(char gender, string name, string email, string phone, int matNum, string ic)
 {
 	this->gender = gender;
@@ -32,6 +44,7 @@ void Student::setStudent(char gender, string name, string email, string phone, i
 	this->IC = ic;
 }
 
+//operator overloading
 bool Student::operator==(string& IC)
 {
 	if (this->IC != IC)
@@ -41,10 +54,4 @@ bool Student::operator==(string& IC)
 	return true;
 }
 
-Student::~Student()
-{
-	gender=0;
-	name=email=phone="";
-	matricNum=0;
-	IC="";
-}
+

@@ -2,12 +2,21 @@
 #include <iostream>
 #include <string>
 
+//Constructor
 Date::Date()
 {
 	CheckIn=CheckOut={0,0,0};
     NumDays = 1;
 }
 
+//Destructor
+Date::~Date()
+{
+    CheckIn = CheckOut = { 0,0,0 };
+    NumDays = 1;
+}
+
+//ALternate constructor
 Date::Date(int d1, int m1, int y1, int d2, int m2, int y2) //alternate constructor
 {
 	CheckIn.d = d1;
@@ -19,6 +28,7 @@ Date::Date(int d1, int m1, int y1, int d2, int m2, int y2) //alternate construct
 	checkValidity();
 }
 
+//This function sets check in and check out dates
 void Date::setDate(int d1, int m1, int y1, int d2, int m2, int y2) //set values of dates
 {
 	CheckIn.d = d1;
@@ -30,6 +40,7 @@ void Date::setDate(int d1, int m1, int y1, int d2, int m2, int y2) //set values 
     checkValidity();
 }
 
+//This function checks the validity of dates
 void Date::checkValidity()
 {
     if (CheckIn.m > 12)
@@ -53,6 +64,8 @@ void Date::checkValidity()
     }
 }
 
+//This function calls function to count number of days
+//stayed in dorm and return it
 int Date::getNumDays()
 {
     getDifference(CheckIn, CheckOut);
@@ -110,13 +123,13 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
         }
         else
         {
-            cout << "CheckOut Month is Small Than CheckIn Month" << endl;
+            cout << "Check out month is smaller than check in month" << endl;
             exit(EXIT_FAILURE);
         }
     }   
     else
     {
-        cout << "Check Out Year Error" << endl;
+        cout << "Check Out Year Error!" << endl;
         exit(EXIT_FAILURE);
     }
     }

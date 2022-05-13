@@ -4,6 +4,7 @@
 
 using namespace std;
 
+//number of days in every month
 const int monthDays[12] = {31,28,31,30,31,30,31,31,30,31,30,31};
 
 struct DateFormat{
@@ -18,10 +19,11 @@ protected:
 	int NumDays;
 	void checkValidity();
 public:
-	Date();
-	Date(int, int, int, int, int, int);
-	void setDate(int, int, int, int, int, int);
-	int getNumDays();
-	void getDifference(DateFormat CheckIn, DateFormat CheckOut);
+	Date(); //date constructor
+	~Date(); //date destructor
+	Date(int, int, int, int, int, int); //alternate constructor
+	void setDate(int, int, int, int, int, int); 
+	int getNumDays(); 
+	void getDifference(DateFormat CheckIn, DateFormat CheckOut); 
 };
 #endif // !DATE_H

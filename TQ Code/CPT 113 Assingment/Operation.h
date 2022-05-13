@@ -5,10 +5,10 @@
 
 using namespace std;
 
-class Operation:public Stay
+class Operation:public Stay //inheritance from class stay
 {
 public:
-	void Registration();
+	void Registration(); 
 	void CalculateFee();
 	void checkDate(int&, int&, int&);
 	int calcDays();
@@ -16,8 +16,8 @@ public:
 	int DesaMenu();
 
 private:
-	Student student;
-	Date date;
+	Student student; //composition class student
+	Date date; //composition class date
 
 };
 
