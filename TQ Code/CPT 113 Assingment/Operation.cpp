@@ -51,8 +51,8 @@ void Operation::CalculateFee()
 		cout << "FEE INFORMATION:" << endl;
 		cout << "------------------------------------------------" << endl;
 		cout << "Days in dorm\t\t: " << daysDorm << " Days" << endl;
-		cout << fixed << setprecision(2) ;
 	}
+	cout << fixed << setprecision(2);
 	cout << "Dorm Daily Rate\t\t: RM" << DAILY_RATE << endl;
 	cout << "Tuition Fee\t\t: RM" << TUITION_FEE << endl << endl;
 	cout << "Total Fee\t\t: RM" << totalfee << endl;
