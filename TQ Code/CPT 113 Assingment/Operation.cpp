@@ -48,10 +48,14 @@ void Operation::CalculateFee()
 	if (regis)
 	{
 		date.displayDate();
-		cout << "Days in dorm: " << daysDorm << " Days" << endl;
-		cout << fixed << setprecision(2) << endl;
+		cout << "FEE INFORMATION:" << endl;
+		cout << "------------------------------------------------" << endl;
+		cout << "Days in dorm\t\t: " << daysDorm << " Days" << endl;
+		cout << fixed << setprecision(2) ;
 	}
-	cout << "Fee: \t\tRM" << totalfee << endl;
+	cout << "Dorm Daily Rate\t\t: RM" << DAILY_RATE << endl;
+	cout << "Tuition Fee\t\t: RM" << TUITION_FEE << endl << endl;
+	cout << "Total Fee\t\t: RM" << totalfee << endl;
 }
 
 //This function is to display desa choices and prompt user input
@@ -61,6 +65,7 @@ int Operation::DesaMenu()
 
 	do
 	{
+	cout << "------------------------------------------------" << endl;
 	cout << "\nPlease Select Desasiswa to Register:" << endl;
 	cout << "1. Restu\n2. Tekun\n3. Aman Damai\n" << endl;
 	cout << "Choices: ( 1 / 2 / 3 ): ";
@@ -106,8 +111,9 @@ void Operation::InputMenu()
 	getline(cin, IC);
 	if (checkIC(IC))
 	{
+		cout << "------------------------------------------------" << endl;
 		cout << "Your Have Register In The Desasiswa" << endl;
-		cout << "Press Enter To Continue" << endl;
+		cout << "Press Enter To Continue..." << endl;
 		cin.get(skip);
 		return;
 	}
@@ -194,6 +200,7 @@ int Operation::calcDays()
 			if (student[0] == student[1]) //operator overloading
 			{
 				student[0] = student[1];
+				cout << "------------------------------------------------" << endl;
 				cout << "Check Out Date: " << endl;
 				checkDate(day2, month2, year2);
 				date.setDate (day1, month1, year1, day2, month2, year2);

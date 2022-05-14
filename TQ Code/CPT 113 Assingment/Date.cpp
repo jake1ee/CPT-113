@@ -68,8 +68,10 @@ void Date::checkValidity()
 
 void Date::displayDate()
 {
-    cout << "CheckInDate: " << CheckIn.d << '/' << CheckIn.m << '/' << CheckIn.y << endl;
-    cout << "CheckOutDate: " << CheckOut.d << '/' << CheckOut.m << '/' << CheckOut.y << endl;
+    cout << "DATE INFORMATION:" << endl;
+    cout << "------------------------------------------------" << endl;
+    cout << "CheckInDate\t\t: " << CheckIn.d << '/' << CheckIn.m << '/' << CheckIn.y << endl;
+    cout << "CheckOutDate\t\t: " << CheckOut.d << '/' << CheckOut.m << '/' << CheckOut.y << endl;
     cout << "------------------------------------------------" << endl;
 }
 
@@ -85,6 +87,7 @@ int Date::getNumDays()
 void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
 {
     checkValidity();
+    NumDays = 0;
     if (CheckOut.y > CheckIn.y)
     {
         NumDays += monthDays[CheckIn.m - 1] - CheckIn.d;
@@ -105,7 +108,7 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
     {
         if (CheckIn.m == CheckOut.m)
         {
-            NumDays = CheckOut.d - CheckIn.d;
+            NumDays = + CheckOut.d - CheckIn.d;
         }
         else if (CheckOut.m > CheckIn.m)
         {
@@ -113,8 +116,7 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
             {
                 NumDays += monthDays[i];
             }
-            cout << NumDays << endl;
-            NumDays =   NumDays+CheckOut.d - CheckIn.d;
+            NumDays = NumDays + CheckOut.d - CheckIn.d;
             cout << NumDays << endl;
         }
         else

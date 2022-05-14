@@ -38,12 +38,13 @@ void Stay::writeTxt(char &gender, string &name, string &email, string &phone, st
 void Stay::displayData(const Student info)
 {
 	cout << "------------------------------------------------" << endl;
-	cout << "Personal Information: " << endl;
-	cout << "Name: \t\t" << info.name << endl;
-	cout << "Gender: \t" << info.gender << endl;
-	cout << "Matric Num: \t" << info.matricNum << endl;
-	cout << "IC: \t\t" << info.IC << endl;
-	cout << "Email: \t\t" << info.email << endl;
-	cout << "Phone: \t\t" << info.phone << endl;
+	cout << "PERSONAL INFORMATION: " << endl;
+	cout << "------------------------------------------------" << endl;
+	cout << "Name\t\t\t: " << info.name << endl;
+	cout << "Gender\t\t\t: " << info.gender << endl;
+	cout << "Matric Num\t\t: " << info.matricNum << endl;
+	cout << "IC\t\t\t: " << info.IC << endl;
+	cout << "Email\t\t\t: " << info.email << endl;
+	cout << "Phone\t\t\t: " << info.phone << endl;
 	cout << "------------------------------------------------" << endl;
 }

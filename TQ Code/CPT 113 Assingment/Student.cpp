@@ -47,7 +47,7 @@ void Student::setStudent(char gender = ' ', string name = "", string email = "",
 //operator overloading
 bool Student::operator==(const Student& Right)
 {
-	if (this->IC !=Right.IC)
+	if (this->matricNum !=Right.matricNum)
 	{
 		return false;
 	}
