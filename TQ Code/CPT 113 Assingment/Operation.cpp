@@ -79,6 +79,7 @@ int Operation::DesaMenu()
 void Operation::InputMenu()
 {
 	char gender;
+	char skip;
 	string name;
 	string email;
 	string phone;
@@ -100,8 +101,17 @@ void Operation::InputMenu()
 	cout << "Gender ( M / F ): ";
 	cin >> gender;
 	} while (gender != 'M' && gender != 'F');
-	
 	cin.get();
+	cout << "IC Number (Exp: 011231-02-5678): ";
+	getline(cin, IC);
+	if (checkIC(IC))
+	{
+		cout << "Your Have Register In The Desasiswa" << endl;
+		cout << "Press Enter To Continue" << endl;
+		cin.get(skip);
+		return;
+	}
+	
 	cout << "Email (Exp: abcd123@gmail.com): ";
 	getline(cin, email);
 	cout << "Phone Number (Exp: 012-2347288): ";
@@ -109,18 +119,17 @@ void Operation::InputMenu()
 	cout << "Matric Number (Exp: 159389): ";
 	cin >> matricNum;
 	cin.get();
-	cout << "IC Number (Exp: 011231-02-5678): ";
-	getline(cin, IC);
-	
+
 	do
 	{
 	cout << "\n------------------------------------------------" << endl;
 	cout << "CheckIn Date: " << endl;
 	checkDate(day, month, year);
 	} while ((month < 0 || month>12) || day < 0);
-	
-
 	writeTxt(gender, name, email, phone, IC, matricNum, day, month, year);
+	system("cls");
+	
+	
 }
 
 //This function is to calculate days stayed in dorm
@@ -243,4 +252,28 @@ void Operation::checkDate(int& day, int& month, int& year)
 	cin >> day;
 	} while (month < 1 || month>12);
 	
+}
+
+bool Operation::checkIC(const string& ic)
+{
+	string IC;
+	string skip = " ";
+	fstream dataFile;
+	dataFile.open("DesaStay2.txt", ios::in);
+	while (!dataFile.eof())
+	{
+		getline(dataFile, skip, '\t');
+		getline(dataFile, skip, '\t');
+		getline(dataFile, skip, '\t');
+		getline(dataFile, IC, '\t');
+		getline(dataFile, skip, '\t');
+		getline(dataFile, skip, '\t');
+		getline(dataFile, skip, '\t');
+		getline(dataFile, skip, '\t');
+		if (IC == ic)
+		{
+			return true;
+		}
+	}
+	return false;
 }

@@ -10,9 +10,10 @@ class Operation:public Stay //inheritance from class stay
 public:
 	void Registration(); 
 	void CalculateFee();
-	void checkDate(int&, int&, int&);
-	int calcDays();
+	void checkDate(int&, int&, int&);	
 	void InputMenu();
+	bool checkIC(const	string&);
+	int calcDays();
 	int DesaMenu();
 
 private:
