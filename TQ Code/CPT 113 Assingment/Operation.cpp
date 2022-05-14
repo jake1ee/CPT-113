@@ -43,11 +43,14 @@ void Operation::CalculateFee()
 	double totalfee;
 	totalfee = TUITION_FEE + (DAILY_RATE * daysDorm);
 	
-	system("cls");
-
-	displayData(student);
-	cout << "Days in dorm: " << daysDorm << " Days" << endl;
-	cout << fixed << setprecision(2) << endl;
+	//system("cls");
+	displayData(student[0]);
+	if (regis)
+	{
+		date.displayDate();
+		cout << "Days in dorm: " << daysDorm << " Days" << endl;
+		cout << fixed << setprecision(2) << endl;
+	}
 	cout << "Fee: \t\tRM" << totalfee << endl;
 }
 
@@ -124,7 +127,6 @@ void Operation::InputMenu()
 int Operation::calcDays()
 {
 	char gender = ' ';
-	bool regis = false;
 
 	string IC;
 	string skip = " ";
@@ -135,7 +137,7 @@ int Operation::calcDays()
 	string desa = " ";
 
 	int matricNum;
-
+	int MatricNum;
 	int day1;
 	int month1;
 	int year1;
@@ -148,8 +150,11 @@ int Operation::calcDays()
 	int daysDorm = 0; //days from check in->check out(today)
 
 	cout << "------------------------------------------------" << endl;
+	cout<<"Enter Matric Num: ";
+	cin >> MatricNum;
 	cout << "Input Identification Number: ";
 	cin >> IC;
+	student[0].setStudent(' ', "", "", "", MatricNum, IC);
 	
 	fstream dataFile;
 	dataFile.open("DesaStay2.txt", ios::in); //read DesaStay.txt file
@@ -176,9 +181,10 @@ int Operation::calcDays()
 			getline(dataFile, skip, '\t');
 			getline(dataFile, desa);
 
-			student.setStudent(gender, name, email, phone, matricNum, icNum);
-			if (student == IC) //operator overloading
+			student[1].setStudent(gender, name, email, phone, matricNum, icNum);
+			if (student[0] == student[1]) //operator overloading
 			{
+				student[0] = student[1];
 				cout << "Check Out Date: " << endl;
 				checkDate(day2, month2, year2);
 				date.setDate (day1, month1, year1, day2, month2, year2);
@@ -190,6 +196,26 @@ int Operation::calcDays()
 		if (!regis)
 		{
 			cout << "You are not registered in any desasiswa!" << endl;
+			cout << "------------------------------------------------" << endl;
+			cout << "Please Enter Your Personal Information:" << endl;
+			cin.get();
+			cout << "Name: ";
+			getline(cin, name);
+
+			do
+			{
+				cout << "Gender ( M / F ): ";
+				cin >> gender;
+			} while (gender != 'M' && gender != 'F');
+
+			cin.get();
+			cout << "Email (Exp: abcd123@gmail.com): ";
+			getline(cin, email);
+			cout << "Phone Number (Exp: 012-2347288): ";
+			getline(cin, phone);
+
+			student[0].setStudent(gender, name, email, phone, MatricNum, IC);
+			
 		}
 
 		//close the file
@@ -207,10 +233,14 @@ int Operation::calcDays()
 //used in calcDays function
 void Operation::checkDate(int& day, int& month, int& year)
 {
-	cout << "Year: ";
+	do
+	{
+	cout << "\nYear: ";
 	cin >> year;
 	cout << "Month: ";
 	cin >> month;
 	cout << "Day: ";
 	cin >> day;
+	} while (month < 1 || month>12);
+	
 }

@@ -23,6 +23,7 @@ public:
 	~Date(); //date destructor
 	Date(int, int, int, int, int, int); //alternate constructor
 	void setDate(int, int, int, int, int, int); 
+	void displayDate();
 	int getNumDays(); 
 	void getDifference(DateFormat CheckIn, DateFormat CheckOut); 
 };

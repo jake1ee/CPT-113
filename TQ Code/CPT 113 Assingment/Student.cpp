@@ -34,7 +34,7 @@ Student::Student(char gender, string name, string email, string phone, int matNu
 }
 
 //This function sets value for student's personal information
-void Student::setStudent(char gender, string name, string email, string phone, int matNum, string ic)
+void Student::setStudent(char gender = ' ', string name = "", string email = "", string phone = "", int matNum = NULL, string ic = "")
 {
 	this->gender = gender;
 	this->name = name;
@@ -45,13 +45,27 @@ void Student::setStudent(char gender, string name, string email, string phone, i
 }
 
 //operator overloading
-bool Student::operator==(string& IC)
+bool Student::operator==(const Student& Right)
 {
-	if (this->IC != IC)
+	if (this->IC !=Right.IC)
+	{
+		return false;
+	}
+	if (this->IC!=Right.IC)
 	{
 		return false;
 	}
 	return true;
+}
+
+void Student::operator=(const Student& Right)
+{
+	this->gender = Right.gender;
+	this->name = Right.name;
+	this->email = Right.email;
+	this->phone = Right.phone;
+	this->matricNum = Right.matricNum;
+	this->IC = Right.IC;
 }
 
 

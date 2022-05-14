@@ -6,14 +6,14 @@
 Date::Date()
 {
 	CheckIn=CheckOut={0,0,0};
-    NumDays = 1;
+    NumDays = 0;
 }
 
 //Destructor
 Date::~Date()
 {
     CheckIn = CheckOut = { 0,0,0 };
-    NumDays = 1;
+    NumDays = 0;
 }
 
 //ALternate constructor
@@ -43,25 +43,34 @@ void Date::setDate(int d1, int m1, int y1, int d2, int m2, int y2) //set values 
 //This function checks the validity of dates
 void Date::checkValidity()
 {
-    if (CheckIn.m > 12)
-    {
-        CheckIn.y++;
-    }
+    
     while (CheckIn.d > monthDays[CheckIn.m - 1])
     {
         CheckIn.d -= monthDays[CheckIn.m - 1];
         CheckIn.m++;
+        if (CheckIn.m > 12)
+            {
+               CheckIn.y++;
+            }
     }
 
-    if (CheckOut.m > 12)
-    {
-        CheckOut.y++;
-    }
-    while (CheckOut.d > monthDays[CheckOut.m ])
+    
+    while (CheckOut.d > monthDays[CheckOut.m - 1])
     {
         CheckOut.d -= monthDays[CheckOut.m - 1];
         CheckOut.m++;
+        if (CheckOut.m > 12)
+        {
+           CheckOut.y++;
+        }
     }
+}
+
+void Date::displayDate()
+{
+    cout << "CheckInDate: " << CheckIn.d << '/' << CheckIn.m << '/' << CheckIn.y << endl;
+    cout << "CheckOutDate: " << CheckOut.d << '/' << CheckOut.m << '/' << CheckOut.y << endl;
+    cout << "------------------------------------------------" << endl;
 }
 
 //This function calls function to count number of days
@@ -72,40 +81,25 @@ int Date::getNumDays()
 	return NumDays;
 }
 
-//// This function counts number of
-//// leap years before the given date
-//int Date::countLeapYears(DateFormat d)
-//{
-//    checkValidity();
-//    int years = d.y;
-// 
-//    // Check if the current year needs to be
-//    //  considered for the count of leap years
-//    // or not
-//    if (d.m <= 2)
-//        years--;
-// 
-//    // An year is a leap year if it is a multiple of 4,
-//    // multiple of 400 and not a multiple of 100.
-//    return (years / 4) - (years / 100) + (years / 400);
-//}
- 
 // This function returns number of days between two given dates
 void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
 {
     checkValidity();
     if (CheckOut.y > CheckIn.y)
     {
-        cout << "InYear" << endl;
         NumDays += monthDays[CheckIn.m - 1] - CheckIn.d;
+        cout << NumDays << endl;
         for (int i = 0; i < CheckOut.m - 1; i++)
         {
             NumDays += monthDays[i];
         }
+        cout << NumDays << endl;
         for (int i = CheckIn.m; i < 12; i++)
         {
             NumDays += monthDays[i];
         }
+        NumDays += CheckOut.d;
+        cout << NumDays << endl;
     }
     else if (CheckOut.y == CheckIn.y)
     {
@@ -115,11 +109,13 @@ void Date::getDifference(DateFormat CheckIn, DateFormat CheckOut)
         }
         else if (CheckOut.m > CheckIn.m)
         {
-            for (int i = CheckIn.m ; i < CheckOut.m - 1; i++)
+            for (int i = CheckIn.m - 1; i < CheckOut.m - 1; i++)
             {
                 NumDays += monthDays[i];
             }
+            cout << NumDays << endl;
             NumDays =   NumDays+CheckOut.d - CheckIn.d;
+            cout << NumDays << endl;
         }
         else
         {

@@ -16,9 +16,9 @@ public:
 	int DesaMenu();
 
 private:
-	Student student; //composition class student
+	Student student[2]; //composition class student
 	Date date; //composition class date
-
+	bool regis = false;
 };
 
 #endif // !OPERATION_H

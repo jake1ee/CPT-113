@@ -22,6 +22,7 @@ public:
 	Student(char, string, string, string, int, string); //alternate constructor
 	void setStudent(char, string, string, string, int, string);
 	friend void Stay::displayData(const Student); //friend
-	bool operator==(string&); //operator overloading
+	bool operator==(const Student&); //operator overloading
+	void operator=(const Student&); //operator overloading
 };
 #endif // !STUDENT_H
