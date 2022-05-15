@@ -166,7 +166,7 @@ int Operation::calcDays()
 
 
 	int daysDorm = 0; //days from check in->check out(today)
-
+	regis = false;
 	cout << "------------------------------------------------" << endl;
 	cout<<"Enter Matric Num: ";
 	cin >> MatricNum;

@@ -6,3 +6,5 @@ Tan Mei Xian	F	159827	012345-07-0987	meixian@gmail.com	012-1233212	15/5/2022	Tek
 Yeow Xin Yee	F	176287	012321-29-2992	yxy12321@gmail.com	016-2879847	16/5/2022	Tekun
 Angeline Teoh	F	158275	092812-89-0873	angeline@gmail.com	016-2838299	4/1/2022	Aman Damai
 Lee Chris	M	159238	021302-02-0789	LEER0909@GMAIL.COM	013-9894032	15/5/2022	Restu
+wong qi ying	M	156789	021212-09-0897	wongqy@yahoo.com	012-3949293	15/5/2022	Restu
+phi yi ting	F	123456	020507-07-1234	yiting@gmail.com	012-3456789	15/5/2022	Restu
