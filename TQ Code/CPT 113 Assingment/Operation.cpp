@@ -113,11 +113,9 @@ void Operation::InputMenu()
 	{
 		cout << "------------------------------------------------" << endl;
 		cout << "Your Have Register In The Desasiswa" << endl;
-		cout << "Press Enter To Continue..." << endl;
-		cin.get(skip);
-		return;
 	}
-	
+	else
+	{
 	cout << "Email (Exp: abcd123@gmail.com): ";
 	getline(cin, email);
 	cout << "Phone Number (Exp: 012-2347288): ";
@@ -133,6 +131,11 @@ void Operation::InputMenu()
 	checkDate(day, month, year);
 	} while ((month < 0 || month>12) || day < 0);
 	writeTxt(gender, name, email, phone, IC, matricNum, day, month, year);
+	}
+	
+		cout << "Press Enter To Continue..." << endl;
+		cin.get(skip);
+	
 	system("cls");
 	
 	
