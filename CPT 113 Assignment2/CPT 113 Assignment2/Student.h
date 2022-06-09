@@ -14,6 +14,7 @@ private:
 	{
 		string CourseCode;
 		int CourseUnit;
+		int grade;
 	};
 	LinkList<Course> course;
 
