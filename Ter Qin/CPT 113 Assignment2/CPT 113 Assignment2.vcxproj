@@ -128,7 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CPT 113 Assignment2.cpp" />
-    <ClCompile Include="LinkedListForCourse.cpp" />
+    <ClCompile Include="LinkList.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -4,22 +4,21 @@
 #include "LinkList.h"
 #include<string>
 
-
 class Student
 {
 private:
 	string name;
 	int matric;
-	LinkList<Course> course;
+	LinkList course;
 
 public:
 	Student();
 	void displayDetails();
 	void setName(string);
 	void setMatric(int);
-	void setCourse(string, string);
 	int getMatric();
 	string getName();
+	bool operator==(const Student&);
 };
 
 #endif // !STUDENT_H

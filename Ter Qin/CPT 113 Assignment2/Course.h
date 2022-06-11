@@ -47,6 +47,21 @@ public:
 		return grade;
 	}
 
+	bool operator ==(const Course& right)
+	{
+		if (this->CourseCode == right.CourseCode && this->CourseUnit == right.CourseUnit)
+			return true;
+		else
+			return false;
+	}
+
+	void operator =(const Course& right)
+	{
+		this->CourseCode = right.CourseCode;
+		this->CourseUnit = right.CourseUnit;
+		this->grade = right.grade;
+	}
+
 private:
 	string CourseCode,CourseUnit;
 	double grade;

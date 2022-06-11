@@ -2,27 +2,20 @@
 #include<iostream>
 #include<fstream>
 
-using namespace std;
 
 void menu();
-void getData(Student* &);
-bool searchSame(string, int);
+bool searchSame(const Student&);
 void Registration();
-void AddDrop(LinkList<Student>);
-void CalUnit(LinkList<Student>);
-void CalCGPA(LinkList<Student>);
+void DisplayStudent(LinkList);
+void CalUnit(LinkList);
+void CalCGPA(LinkList);
 
 int main()
 {
 	char choice=-1;
-	Student* student;
-	getData(student);
-	
-	
-	
-	
 
-	//egistration();
+
+	Registration();
 
 	/*do
 	{
@@ -64,28 +57,51 @@ void menu()
 
 void Registration()
 {
+	Student Temp;
 	string name, code, unit;
 	int matric;
 	cout << "Please Enter Your Name :";
 	getline(cin, name);
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
-	if (!searchSame(name, matric))
+	Temp.setMatric(matric);
+	Temp.setName(name);
+	if (!searchSame(Temp))
 	{
-		LinkList<Course> list;
-		Course add;
+		LinkList list;
+		Course add, Delete;
 		int choice = 1, numC = 0;
+		numC++;
 		do
 		{
-			cin.get();
-			cout << "Course Code: ";
-			getline(cin,code);
-			cout << "Course Unit: ";
-			cin >> unit;
-			add.setCourse(code, unit);
-			list.appendNode(add);
-			numC++;
-			cout << "\n1. Add Course\n0. Quit" << endl;
+			switch (choice)
+			{
+			case 1:
+				cin.get();
+				cout << "Course Code: ";
+				getline(cin, code);
+				cout << "Course Unit: ";
+				cin >> unit;
+				add.setCourse(code, unit);
+				list.appendNode(add,numC);
+				break;
+			case 2:
+				list.displayList();
+				cin.get();
+				cout << "Course Code: ";
+				getline(cin, code);
+				cout << "Course Unit: ";
+				cin >> unit;
+				Delete.setCourse(code, unit);
+				list.deleteNode(Delete,numC);
+
+				system("pause");
+				break;
+			default:
+				cout << "Invalid Choice: please try again" << endl;
+				break;
+			}
+			cout << "\n1. Add Course\n2. Delete Course\n0. Quit" << endl;
 			cout << "Choice: ";
 			cin >> choice;
 			system("cls");
@@ -94,26 +110,27 @@ void Registration()
 	}
 }
 
-void AddDrop(LinkList<Student>)
+void AddDrop()
 {
 
 }
 
-void CalUnit(LinkList<Student>)
+void DisplayStudent()
 {
 
 }
 
-void CalCGPA(LinkList<Student>)
+void CalCGPA()
 {
 
 }
 
-bool searchSame(string Tname = "", int Tmatric = 0)
+bool searchSame(const Student& compare)
 {
 	fstream file("Student.txt", ios::in);
 	if (file.is_open())
 	{
+		Student temp;
 		string name, garbage;
 		int  num;
 		do
@@ -121,7 +138,9 @@ bool searchSame(string Tname = "", int Tmatric = 0)
 			getline(file, name, '\t');
 			if (file.eof()) break;
 			file >> num;
-			if (name == Tname || num == Tmatric)
+			temp.setName(name);
+			temp.setMatric(num);
+			if (temp == compare)
 			{
 				return true;
 			}
@@ -134,40 +153,4 @@ bool searchSame(string Tname = "", int Tmatric = 0)
 		cout << "File Unable to open" << endl;
 	}
 	return false;
-}
-
-void getData(Student* &student)
-{
-	fstream file("Student.txt", ios::in);
-	if (file.is_open())
-	{
-		string name, code, unit, garbage = "";
-		int num, numcourse, numStu;
-		file >> numStu;
-		student = new Student[numStu];
-		for (int i = 0; i < numStu; i++)
-		{
-			getline(file, name, '\t');
-
-			if (file.eof()) break;
-
-			file >> num >> numcourse;
-			getline(file, garbage, '\t');
-			cout << name << num << endl;
-			student[i].setName(name);
-			student[i].setMatric(num);
-
-			for (int j = 0; j < numcourse; i++)
-			{
-				getline(file, code, '/');
-				getline(file, unit, '\t');
-				student[i].setCourse(code, unit);
-			}
-			cout << endl;
-		}
-	}
-	else
-	{
-		cout << "File Unable to open" << endl;
-	}
 }

@@ -1,5 +1,4 @@
 #include "Student.h"
-#include <fstream>
 
 Student::Student()
 {
@@ -23,13 +22,7 @@ void Student::setMatric(int m)
 {
 	matric = m;
 }
-void Student::setCourse(string code, string unit)
-{
-	Course *temp = new Course;
-	temp->setCourse(code, unit);
-	course.appendNode(*temp);
-	cout << 1;
-}
+
 int Student::getMatric()
 {
 	return matric;
@@ -38,14 +31,10 @@ string Student::getName()
 {
 	return name;
 }
-
-void LinkList<Student>::DisplayStudent()
-{	
-	ListNode<Student>* nodeptr = head;
-	while (nodeptr != nullptr)
-	{
-		
-		nodeptr->value.displayDetails();
-		nodeptr = nodeptr->next;
-	}
+bool Student::operator==(const Student& right)
+{
+	if (this->name == right.name && this->matric == right.matric)
+		return true;
+	else
+		return false;
 }
