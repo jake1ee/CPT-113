@@ -22,7 +22,7 @@ public:
 		cout << "Course Unit: " << CourseUnit << endl;
 	}
 
-	void setCourse(string code, string unit)
+	void setCourse(string code, string unit = 0)
 	{
 		CourseCode = code;
 		CourseUnit = unit;
@@ -67,4 +67,6 @@ private:
 	double grade;
 
 };
+
+
 #endif // !COURSE_H

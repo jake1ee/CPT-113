@@ -9,13 +9,16 @@ class Student
 private:
 	string name;
 	int matric;
-	LinkList course;
+	LinkList<Course> course;
 
 public:
 	Student();
+	void reset();
 	void displayDetails();
 	void setName(string);
 	void setMatric(int);
+	void setStudentCourse(Course);
+	bool searchCourse(string, string);
 	int getMatric();
 	string getName();
 	bool operator==(const Student&);

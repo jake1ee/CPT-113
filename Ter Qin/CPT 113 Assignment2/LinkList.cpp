@@ -1,40 +1,15 @@
 #include"LinkList.h"
 
-//****************************************
-// Destructor *
-// This function deletes every node in the list. *
-//**************************************************
-
-
-LinkList::~LinkList()
-{
-	ListNode* nodePtr; // To traverse the list
-	ListNode* nextNode; // To point to the next node
-	// Position nodePtr at the head of the list.
-	nodePtr = head;
-	// While nodePtr is not at the end of the list...
-	while (nodePtr != NULL)
-	{
-		// Save a pointer to the next node.
-		nextNode = nodePtr->next;
-		// Delete the current node.
-		delete nodePtr;
-		// Position nodePtr at the next node.
-		nodePtr = nextNode;
-	}
-}
-
 //**************************************************
 // appendNode appends a node containing the value *
 // pased into newValue, to the end of the list. *
 //**************************************************
-
-void LinkList::appendNode(Course newValue, int &numCourse)
+void LinkList<Course>::appendNode(Course newValue, int &numCourse)
 {
-	ListNode* newNode; // To point to a new node
-	ListNode* nodePtr; // To move through the list
+	ListNode<Course>* newNode; // To point to a new node
+	ListNode<Course>* nodePtr; // To move through the list
 	// Allocate a new node and store newValue there.
-	newNode = new ListNode(newValue);
+	newNode = new ListNode<Course>(newValue);
 	// If there are no nodes in the list,make newNode the first node.
 	if (!head)
 	{
@@ -59,9 +34,9 @@ void LinkList::appendNode(Course newValue, int &numCourse)
 // of the linked list pointed to by head. *
 //**************************************************
 
-void LinkList::displayList() const
+void LinkList<Course>::displayListC()
 {
-	ListNode* nodePtr;
+	ListNode<Course>* nodePtr;
 	// To move through the list
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
@@ -82,10 +57,10 @@ void LinkList::displayList() const
 // is deleted from the list and from memory. *
 //*****************************************************
 
-void LinkList::deleteNode(Course searchValue, int& numCourse)
+void LinkList<Course>::deleteNode(Course searchValue, int& numCourse)
 {
-	ListNode* nodePtr = nullptr; // To traverse the list
-	ListNode* previousNode = nullptr; // To point to the previous node
+	ListNode<Course>* nodePtr = nullptr; // To traverse the list
+	ListNode<Course>* previousNode = nullptr; // To point to the previous node
 	// If the list is empty, do nothing.
 	if (!head)
 	{
@@ -128,21 +103,15 @@ void LinkList::deleteNode(Course searchValue, int& numCourse)
 	}
 }
 
-void LinkList::searchNode(Course searchValue)
+bool LinkList<Course>::searchNode(Course searchValue)
 {
-	ListNode* nodePtr; // To traverse
-	ListNode* previousNode; // To point to
+	ListNode<Course>* nodePtr; // To traverse
+	ListNode<Course>* previousNode; // To point to
 	// If the list is empty, do nothing.
 	if (!head)
 		cout << "List is Empty\n";
 	// Determine if the first node is the one.
-	if (head != nullptr && head->value == searchValue)
-	{
-		cout << "\n Found at first node \n";
-		head->value; system("pause");
-	}
-	else
-	{
+
 		// Initialize nodePtr to head of list
 		nodePtr = head;
 		// Skip all nodes whose value member is not equal to IC.
@@ -156,31 +125,16 @@ void LinkList::searchNode(Course searchValue)
 		// nodePtr, then delete nodePtr.
 		if (nodePtr)
 		{
-			cout << "\n Found \n";
-			nodePtr->value;
-			system("pause");
+			return true;
 		}
-		else
-		{
-			cout << "\nNot found\n"; system("pause");
-		}
-	}
+		return false;
+	
 }
 
-void LinkList::DisplayStudentCourse()
-{
-	ListNode* nodeptr = head;
-	while (nodeptr != nullptr)
-	{
-		nodeptr->value.displayCourse();
-		nodeptr = nodeptr->next;
-	}
-}
-
-void LinkList::WriteCourse(string name, int num, int numCourse)
+void LinkList<Course>::WriteCourse(string name, int num, int numCourse)
 {
 	fstream file("Student.txt", ios::app | ios::out);
-	ListNode* nodeptr = head;
+	ListNode<Course>* nodeptr = head;
 
 	if (file.is_open())
 	{
