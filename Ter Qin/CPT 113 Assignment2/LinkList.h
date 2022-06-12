@@ -53,6 +53,7 @@ public:
 	bool searchNode(Course); //to search node
 	void displayListC() ; //to display all nodes
 	void WriteCourse(string, int, int); // to wtite the Student Info to txt file
+	int getTotalUnit();
 };
 
 //****************************************

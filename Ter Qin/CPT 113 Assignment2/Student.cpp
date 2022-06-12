@@ -23,6 +23,15 @@ void Student::displayDetails()
 	course.displayListC();
 }
 
+void Student::displayUnits()
+{
+	int units = course.getTotalUnit();
+	cout << "Name: " << name << endl;
+	cout << "Matric Num: " << matric << endl;
+	cout << "Total Units Taken: " << units << endl;
+	
+}
+
 void Student::setName(string n)
 {
 	name = n;

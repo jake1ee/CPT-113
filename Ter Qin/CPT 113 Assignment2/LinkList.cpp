@@ -51,6 +51,23 @@ void LinkList<Course>::displayListC()
 	}
 }
 
+int LinkList<Course>::getTotalUnit()
+{
+	ListNode<Course>* nodePtr;
+	// To move through the list
+	// Position nodePtr at the head of the list.
+	nodePtr = head;
+	int totalUnit=0;
+	// While nodePtr points to a node, traverse the list.
+	while (nodePtr)
+	{
+		totalUnit = totalUnit + stoi(nodePtr->value.getUnit());
+		// Move to the next node.
+		nodePtr = nodePtr->next;
+	}
+	return totalUnit;
+}
+
 //*****************************************************
 // The deleteNode function searches for a node *
 // with searchValue as its value. The node, if found, *

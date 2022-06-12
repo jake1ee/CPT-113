@@ -15,6 +15,7 @@ public:
 	Student();
 	void reset();
 	void displayDetails();
+	void displayUnits();
 	void setName(string);
 	void setMatric(int);
 	void setStudentCourse(Course);

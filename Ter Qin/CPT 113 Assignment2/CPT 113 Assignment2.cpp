@@ -14,10 +14,10 @@ int main()
 {
 	char choice=-1;
 
-
+	CalUnit();
 	//Registration();
 	//DisplayStudent();
-	StudentSameCourse();
+	//StudentSameCourse();
 	/*do
 	{
 		menu();
@@ -188,7 +188,25 @@ void StudentSameCourse()
 
 void CalUnit()
 {
-
+	Student Temp;
+	string name, code, unit;
+	int matric;
+	cout << "Please Enter Your Name :";
+	getline(cin, name);
+	cout << "Please Enter Your Matric Number :";
+	cin >> matric;
+	Temp.setMatric(matric);
+	Temp.setName(name);
+	if (searchSame(Temp))
+	{
+		Temp.displayUnits();
+	}
+	else
+	{
+		cout << "Student Not Found." << endl;
+	}
+	system("pause");
+	system("cls");
 }
 
 void CalCGPA()
