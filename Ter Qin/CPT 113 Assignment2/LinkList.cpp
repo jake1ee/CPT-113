@@ -4,7 +4,7 @@
 // appendNode appends a node containing the value *
 // pased into newValue, to the end of the list. *
 //**************************************************
-void LinkList<Course>::appendNode(Course newValue, int &numCourse)
+void LinkList<Course>::appendNode(Course newValue, int& numCourse)
 {
 	ListNode<Course>* newNode; // To point to a new node
 	ListNode<Course>* nodePtr; // To move through the list
@@ -14,7 +14,7 @@ void LinkList<Course>::appendNode(Course newValue, int &numCourse)
 	if (!head)
 	{
 		head = newNode;
-	}	
+	}
 	else // Otherwise, insert newNode at end.
 	{
 		// Initialize nodePtr to head of list.
@@ -24,7 +24,6 @@ void LinkList<Course>::appendNode(Course newValue, int &numCourse)
 			nodePtr = nodePtr->next;
 		// Insert newNode as the last node.
 		nodePtr->next = newNode;
-		
 	}
 	numCourse++;
 }
@@ -57,11 +56,11 @@ int LinkList<Course>::getTotalUnit()
 	// To move through the list
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
-	int totalUnit=0;
+	int totalUnit = 0;
 	// While nodePtr points to a node, traverse the list.
 	while (nodePtr)
 	{
-		totalUnit = totalUnit + stoi(nodePtr->value.getUnit());
+		totalUnit = totalUnit + nodePtr->value.getUnit();
 		// Move to the next node.
 		nodePtr = nodePtr->next;
 	}
@@ -84,20 +83,19 @@ void LinkList<Course>::deleteNode(Course searchValue, int& numCourse)
 		cout << "List is Empty\n";
 		return;
 	}
+	// Initialize nodePtr to head of list
+	nodePtr = head;
 
 	// Determine if the first node is the one.
 	if (head != nullptr && head->value == searchValue)
 	{
-		nodePtr = head;
 		head = head->next;
 		numCourse--;
-		cout << "Deleting Node with Code( " << head->value.getCode() << '/' << head->value.getUnit() << ")" << endl;
+		cout << "Deleting Node with Code( " << nodePtr->value.getCode() << '/' << nodePtr->value.getUnit() << ")" << endl;
 		delete nodePtr;
 	}
 	else
 	{
-		// Initialize nodePtr to head of list
-		nodePtr = head;
 		// Skip all nodes whose value member is not equal to num.
 		while (nodePtr != NULL && !(nodePtr->value == searchValue))
 		{
@@ -119,34 +117,34 @@ void LinkList<Course>::deleteNode(Course searchValue, int& numCourse)
 		}
 	}
 }
-
-bool LinkList<Course>::searchNode(Course searchValue)
-{
-	ListNode<Course>* nodePtr; // To traverse
-	ListNode<Course>* previousNode; // To point to
-	// If the list is empty, do nothing.
-	if (!head)
-		cout << "List is Empty\n";
-	// Determine if the first node is the one.
-
-		// Initialize nodePtr to head of list
-		nodePtr = head;
-		// Skip all nodes whose value member is not equal to IC.
-		while (nodePtr != NULL && !(nodePtr->value == searchValue))
-		{
-			previousNode = nodePtr;
-			nodePtr = nodePtr->next;
-		}
-		// If nodePtr is not at the end of the list,
-		// link the previous node to the node after
-		// nodePtr, then delete nodePtr.
-		if (nodePtr)
-		{
-			return true;
-		}
-		return false;
-	
-}
+//
+//bool LinkList<Course>::searchNode(Course searchValue)
+//{
+//	ListNode<Course>* nodePtr; // To traverse
+//	ListNode<Course>* previousNode; // To point to
+//	// If the list is empty, do nothing.
+//	if (!head)
+//		cout << "List is Empty\n";
+//	// Determine if the first node is the one.
+//
+//		// Initialize nodePtr to head of list
+//	nodePtr = head;
+//	// Skip all nodes whose value member is not equal to IC.
+//	while (nodePtr != NULL && !(nodePtr->value == searchValue))
+//	{
+//		previousNode = nodePtr;
+//		nodePtr = nodePtr->next;
+//	}
+//	// If nodePtr is not at the end of the list,
+//	// link the previous node to the node after
+//	// nodePtr, then delete nodePtr.
+//	if (nodePtr)
+//	{
+//		return true;
+//	}
+//	return false;
+//
+//}
 
 void LinkList<Course>::WriteCourse(string name, int num, int numCourse)
 {
@@ -171,4 +169,35 @@ void LinkList<Course>::WriteCourse(string name, int num, int numCourse)
 
 
 	file.close();
+}
+
+void LinkList<Course>::setSame(const LinkList<Course>& obj)
+{
+
+	ListNode<Course>* current = obj.head;
+	ListNode<Course>* newNode; // To point to a new node
+	ListNode<Course>* nodePtr; // To move through the list
+
+	while (current)
+	{
+		// Allocate a new node and store newValue there.
+		newNode = new ListNode<Course>(current->value);
+		// If there are no nodes in the list,make newNode the first node.
+		if (!head)
+		{
+			this->head = newNode;
+		}
+		else // Otherwise, insert newNode at end.
+		{
+			// Initialize nodePtr to head of list.
+			nodePtr = this->head;
+			// Find the last node in the list.
+			while (nodePtr->next)
+				nodePtr = nodePtr->next;
+			// Insert newNode as the last node.
+			nodePtr->next = newNode;
+		}
+		current = current->next;
+	}
+
 }

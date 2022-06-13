@@ -11,8 +11,6 @@ void Student::reset()
 	name = "";
 	matric = NULL;
 	course.~LinkList();
-	
-
 }
 
 void Student::displayDetails()
@@ -29,7 +27,7 @@ void Student::displayUnits()
 	cout << "Name: " << name << endl;
 	cout << "Matric Num: " << matric << endl;
 	cout << "Total Units Taken: " << units << endl;
-	
+
 }
 
 void Student::setName(string n)
@@ -42,16 +40,16 @@ void Student::setMatric(int m)
 	matric = m;
 }
 
-void Student::setStudentCourse(Course c)
+void Student::setStudentCourse(Course& c)
 {
 	int temp = 0;
-	course.appendNode(c,temp);
+	course.appendNode(c, temp);
 }
 
-bool Student::searchCourse(string code, string unit)
+bool Student::searchCourse(string code, int unit)
 {
 	Course temp;
-	temp.setCourse(code,unit);
+	temp.setCourse(code, unit);
 	if (course.searchNode(temp))
 	{
 		return true;
@@ -75,4 +73,22 @@ bool Student::operator==(const Student& right)
 		return true;
 	else
 		return false;
+}
+
+void Student::operator=(const Student& right)
+{
+	Student::reset();
+	this->name = right.name;
+	this->matric = right.matric;
+	this->course.setSame(right.course);
+}
+
+void LinkList<Student>::displayListS()
+{
+	ListNode<Student>* nodeptr = head;
+	while (nodeptr)
+	{
+		nodeptr->value.displayDetails();
+		nodeptr = nodeptr->next;
+	}
 }

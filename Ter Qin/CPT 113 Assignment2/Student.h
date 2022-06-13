@@ -18,11 +18,14 @@ public:
 	void displayUnits();
 	void setName(string);
 	void setMatric(int);
-	void setStudentCourse(Course);
-	bool searchCourse(string, string);
+	void setStudentCourse(Course&);
+	bool searchCourse(string, int);
 	int getMatric();
 	string getName();
 	bool operator==(const Student&);
+	void operator=(const Student&);
 };
+
+
 
 #endif // !STUDENT_H

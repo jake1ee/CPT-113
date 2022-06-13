@@ -1,77 +1,112 @@
 #include"Student.h"
 #include<iostream>
 #include<fstream>
+#include"Student.h"
+
+void getInput(Student&);
+int getData(Student* &);
+
+void Registration(Student* &, int);
+void displayStudent(Student*&, int);
+void StudentSameCourse(Student*&, int);
+void CalUnit(Student*&, int);
 
 
-void menu();
-bool searchSame(const Student&);
-void Registration();
-void DisplayStudent(LinkList);
-void CalUnit(LinkList);
-void CalCGPA(LinkList);
 
 int main()
 {
-	char choice = -1;
+	Student* student;
+	int size = getData(student);
+	/*Registration(student, size);*/
+	/*displayStudent(student, size);*/
+	/*StudentSameCourse(student, size);*/
+	CalUnit(student, size);
 
 
-	Registration();
 
-	/*do
-	{
-		menu();
-		cin >> choice;
-		switch (choice)
-		{
-		case '1':
-			Registration(student);
-			break;
-		case '2':
-			AddDrop(student);
-			break;
-		case '3':
-			CalUnit(student);
-			break;
-		case '4':
-			CalCGPA(student);
-			break;
-		case '0':
+	
 
-			break;
-		default:
-			cout << "Invalid Choice: Please Enter Again.";
-			break;
-		}
-	} while (choice!= 0);*/
-
+	
 
 	return 0;
 }
 
-void menu()
+void getInput(Student& student)
 {
-	cout << " ---------- Welcome to Group 26 Course Registration ---------- " << endl;
-	cout << "1. Course Registration \n2. Add/Drop Course \n3. Total Unit of the semester\n4. Calculate CGPA of the Semester\n0. Exit" << endl;
-	cout << "Choice: ";
-}
-
-void Registration()
-{
-	Student Temp;
-	string name, code, unit;
-	int matric;
+	string name, code;
+	int matric, unit;
+	bool same = false;
 	cout << "Please Enter Your Name :";
 	getline(cin, name);
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
-	Temp.setMatric(matric);
-	Temp.setName(name);
-	if (!searchSame(Temp))
+	student.setName(name);
+	student.setMatric(matric);
+}
+
+int getData(Student*& student)
+{
+	fstream file("Student.txt", ios::in);
+	if (file.is_open())
 	{
-		LinkList list;
+		Student temp;
+		Course temp2;
+		string name, code, garbage;
+		int  num, numC, numS=0, unit;
+		while (getline(file,garbage))
+		{
+			numS++;
+		}
+		file.clear();
+		file.seekg(0, ios::beg);
+		student = new Student[numS];
+		for (int i = 0; i < numS; i++)
+		{
+			getline(file, name, '\t');
+			if (file.eof()) break;
+			file >> num;
+			temp.setName(name);
+			temp.setMatric(num);
+			file >> numC;
+			getline(file, garbage, '\t');
+			for (int i = 0; i < numC; i++)
+			{
+				getline(file, code, '/');
+				file >> unit;
+				getline(file, garbage, '\t');
+				temp2.setCourse(code, unit);
+				temp.setStudentCourse(temp2);
+			}
+			getline(file, garbage);
+			student[i] = temp;
+			temp.reset();
+		}
+		return numS;
+	}
+	else
+	{
+		cout << "File Unable to open" << endl;
+	}
+	return -1;
+}
+
+void Registration(Student*& student, int size)
+{
+	Student temp;
+	getInput(temp);
+	bool same = false;
+	for (int i = 0; i < size; i++)
+	{
+		if (student[i] == temp)
+			same = true;
+	}
+	
+	if (!same)
+	{
+		LinkList<Course> list;
 		Course add, Delete;
-		int choice = 1, numC = 0;
-		numC++;
+		string code;
+		int choice = 1, numC = 0, unit;
 		do
 		{
 			switch (choice)
@@ -86,7 +121,7 @@ void Registration()
 				list.appendNode(add, numC);
 				break;
 			case 2:
-				list.displayList();
+				list.displayListC();
 				cin.get();
 				cout << "Course Code: ";
 				getline(cin, code);
@@ -106,51 +141,84 @@ void Registration()
 			cin >> choice;
 			system("cls");
 		} while (choice != 0);
-		list.WriteCourse(name, matric, numC);
+		list.WriteCourse(temp.getName(), temp.getMatric(), numC);
 	}
 }
 
-void AddDrop()
+void displayStudent(Student*& student, int size)
 {
-
-}
-
-void DisplayStudent()
-{
-
-}
-
-void CalCGPA()
-{
-
-}
-
-bool searchSame(const Student& compare)
-{
-	fstream file("Student.txt", ios::in);
-	if (file.is_open())
+	Student temp;
+	getInput(temp);
+	bool same = false;
+	for (int i = 0; i < size; i++)
 	{
-		Student temp;
-		string name, garbage;
-		int  num;
-		do
+		if (student[i] == temp)
 		{
-			getline(file, name, '\t');
-			if (file.eof()) break;
-			file >> num;
-			temp.setName(name);
-			temp.setMatric(num);
-			if (temp == compare)
-			{
-				return true;
-			}
-			getline(file, garbage);
-
-		} while (!file.eof());
+			same = true;
+			temp = student[i];
+		}
+			
+	}
+	if (same)
+	{
+		temp.displayDetails();
 	}
 	else
 	{
-		cout << "File Unable to open" << endl;
+		cout << "Student Not Found." << endl;
 	}
-	return false;
+	system("pause");
+	system("cls");
+}
+
+
+void StudentSameCourse(Student*& student, int size)
+{
+	LinkList<string> list;
+	string search;
+	int search2;
+	cout << "Please Enter Course Code: ";
+	getline(cin, search);
+	cout << "Please Enter Course Unit: ";
+	cin >> search2;
+	for (int i = 0; i < size; i++)
+	{
+		if (student[i].searchCourse(search, search2))
+			list.appendNode(student[i].getName());
+	}
+		if (!list.empty())
+		{
+			cout << "The Student which take the course " << search << "/" << search2 << " is: " << endl;
+			list.displayList();
+		}
+		else
+		{
+			cout << "No one take the course " << search << "/" << search2 << endl;
+		}
+
+}
+
+void CalUnit(Student*& student, int size)
+{
+	Student Temp;
+	bool same = false;
+	getInput(Temp);
+	for (int i = 0; i < size; i++)
+	{
+		if (student[i] == Temp)
+		{
+			Temp = student[i];
+			same = true;
+		}
+	}
+	if (same)
+	{
+		Temp.displayUnits();
+	}
+	else
+	{
+		cout << "Student Not Found." << endl;
+	}
+	system("pause");
+	system("cls");
 }

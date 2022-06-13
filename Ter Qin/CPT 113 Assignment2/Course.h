@@ -12,7 +12,7 @@ public:
 	Course()
 	{
 		CourseCode = "";
-		CourseUnit = "";
+		CourseUnit = NULL;
 		grade = NULL;
 	}
 
@@ -22,7 +22,7 @@ public:
 		cout << "Course Unit: " << CourseUnit << endl;
 	}
 
-	void setCourse(string code, string unit = 0)
+	void setCourse(string code = "", int unit = 0)
 	{
 		CourseCode = code;
 		CourseUnit = unit;
@@ -37,7 +37,7 @@ public:
 		return CourseCode;
 	}
 
-	string getUnit()
+	int getUnit()
 	{
 		return CourseUnit;
 	}
@@ -63,7 +63,8 @@ public:
 	}
 
 private:
-	string CourseCode,CourseUnit;
+	string CourseCode;
+	int CourseUnit;
 	double grade;
 
 };

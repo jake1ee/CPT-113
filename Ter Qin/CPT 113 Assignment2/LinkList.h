@@ -12,12 +12,17 @@ using namespace std;
 // store a node of the linked list. *
 //*********************************************
 template<class T>
- class ListNode
+class ListNode
 {
 public:
 	T value; // Node value T of class personInfo - composition
 	ListNode<T>* next; // Pointer to the next node
 	//Constructor
+	ListNode()
+	{
+		value = NULL;
+		next = nullptr;
+	}
 	ListNode(T nodeValue)
 	{
 		value = nodeValue;
@@ -25,7 +30,8 @@ public:
 	}
 };
 
- template<class T>
+
+template<class T>
 class LinkList
 {
 private:
@@ -45,15 +51,19 @@ public:
 	void appendNode(T); //to add node
 	void insertNode(T); //to insert node
 	void deleteNode(T); //to delete node
+	bool searchNode(T); //to search node
 	void displayList() const; //to display all nodes
 	bool empty();       //to check the list is empty or not
 	// For Course Type of data
 	void appendNode(Course, int&); //to add node
 	void deleteNode(Course, int&); //to delete node
-	bool searchNode(Course); //to search node
-	void displayListC() ; //to display all nodes
+	void displayListC(); //to display all nodes
 	void WriteCourse(string, int, int); // to wtite the Student Info to txt file
+	void setSame(const LinkList<Course>&);
 	int getTotalUnit();
+
+
+	void displayListS();
 };
 
 //****************************************
@@ -65,20 +75,21 @@ template<class T>
 LinkList<T>::~LinkList()
 {
 	ListNode<T>* nodePtr; // To traverse the list
-	ListNode<T>* nextNode; // To point to the next node
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
 	// While nodePtr is not at the end of the list...
-	while (nodePtr != NULL)
+	while (nodePtr)
 	{
+
 		// Save a pointer to the next node.
-		nextNode = nodePtr->next;
+		ListNode<T>* nextNode = nodePtr->next;
 		// Delete the current node.
 		delete nodePtr;
 		// Position nodePtr at the next node.
 		nodePtr = nextNode;
 	}
 	head = nullptr;
+
 }
 
 
@@ -182,6 +193,35 @@ void LinkList<T>::insertNode(T newValue)
 	}
 }
 
+template<class T>
+bool LinkList<T>::searchNode(T searchValue)
+{
+	ListNode<T>* nodePtr; // To traverse
+	ListNode<T>* previousNode; // To point to
+	// If the list is empty, do nothing.
+	if (!head)
+		cout << "List is Empty\n";
+	// Determine if the first node is the one.
+
+		// Initialize nodePtr to head of list
+	nodePtr = head;
+	// Skip all nodes whose value member is not equal to IC.
+	while (nodePtr != NULL && !(nodePtr->value == searchValue))
+	{
+		previousNode = nodePtr;
+		nodePtr = nodePtr->next;
+	}
+	// If nodePtr is not at the end of the list,
+	// link the previous node to the node after
+	// nodePtr, then delete nodePtr.
+	if (nodePtr)
+	{
+		return true;
+	}
+	return false;
+
+}
+
 //*****************************************************
 // The deleteNode function searches for a node *
 // with searchValue as its value. The node, if found, *
@@ -208,7 +248,7 @@ void LinkList<T>::deleteNode(T searchValue)
 		// Initialize nodePtr to head of list
 		nodePtr = head;
 		// Skip all nodes whose value member is not equal to num.
-		while (nodePtr != NULL && nodePtr->value !=searchValue)
+		while (nodePtr != NULL && nodePtr->value != searchValue)
 		{
 			previousNode = nodePtr;
 			nodePtr = nodePtr->next;

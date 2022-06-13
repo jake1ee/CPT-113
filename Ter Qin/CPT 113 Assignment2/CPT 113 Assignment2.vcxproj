@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="CPT 113 Assignment2.cpp" />
     <ClCompile Include="LinkList.cpp" />
+    <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Student.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Course.h" />
     <ClInclude Include="LinkList.h" />
+    <ClInclude Include="Operation.h" />
     <ClInclude Include="Student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
