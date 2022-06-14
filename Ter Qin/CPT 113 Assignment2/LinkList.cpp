@@ -57,15 +57,18 @@ void LinkList<Course>::displayListG()
 	// To move through the list
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
+	int numC = 0;
 	string grade;
 	// While nodePtr points to a node, traverse the list.
 	while (nodePtr)
 	{
+		LinkList<Course> list;
 		// Display the value in this node.
 		nodePtr->value.displayCourse();
 		cout << "Course Grade: ";
 		getline(cin, grade);
 		add.setGrade(grade);
+		list.appendNode(add, numC);
 		cout << endl;
 		// Move to the next node.
 		nodePtr = nodePtr->next;
@@ -99,7 +102,9 @@ double LinkList<Course>::getGP()
 	// While nodePtr points to a node, traverse the list.
 	while (nodePtr)
 	{
-		totalGP += (nodePtr->value.getUnit() * nodePtr->value.getGrade());
+		cout << nodePtr->value.getGradePoint() << endl;
+		cout << nodePtr->value.getUnit() << endl;
+		totalGP = totalGP + (nodePtr->value.getUnit() * nodePtr->value.getGradePoint());
 		// Move to the next node.
 		nodePtr = nodePtr->next;
 	}

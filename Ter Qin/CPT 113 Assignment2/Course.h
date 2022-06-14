@@ -14,6 +14,7 @@ public:
 		CourseCode = "";
 		CourseUnit = NULL;
 		grade = "";
+		gp = 0.0;
 	}
 
 	void displayCourse()
@@ -30,6 +31,7 @@ public:
 	void setGrade(string g)
 	{
 		grade = g;
+		GradePoint();
 	}
 
 	string getCode()
@@ -42,34 +44,36 @@ public:
 		return CourseUnit;
 	}
 
-	double getGrade()
+	void GradePoint()
 	{
-		if (grade == "A" || grade == "a")
+		if (grade == "A")
 			gp = 4.00;
-		else if (grade == "A-" || grade == "a-")
+		else if (grade == "A-")
 			gp = 3.67;
-		else if (grade == "B+" || grade == "b+")
+		else if (grade == "B+")
 			gp = 3.33;
-		else if (grade == "B" || grade == "b")
+		else if (grade == "B")
 			gp = 3.00;
-		else if (grade == "B-" || grade == "b-")
+		else if (grade == "B-")
 			gp = 2.67;
-		else if (grade == "C+" || grade == "c+")
+		else if (grade == "C+")
 			gp = 2.33;
-		else if (grade == "C" || grade == "c")
+		else if (grade == "C")
 			gp = 2.00;
-		else if (grade == "C-" || grade == "c-")
+		else if (grade == "C-")
 			gp = 1.67;
-		else if (grade == "D+" || grade == "d+")
+		else if (grade == "D+")
 			gp = 1.33;
-		else if (grade == "D" || grade == "d")
+		else if (grade == "D")
 			gp = 1.00;
-		else if (grade == "D-" || grade == "d-")
+		else if (grade == "D-")
 			gp = 0.67;
-		else if (grade == "F" || grade == "f")
-			gp = 0.00;
 		else
-			cout << "Grade not identified!" << endl;
+			gp = 0.00;
+	}
+
+	double getGradePoint()
+	{
 		return gp;
 	}
 
@@ -80,6 +84,8 @@ public:
 		else
 			return false;
 	}
+
+
 
 	void operator =(const Course& right)
 	{

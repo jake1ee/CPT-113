@@ -37,6 +37,7 @@ void Student::displayDetailsGPA()
 	cout << "Name: " << name << endl;
 	cout << "Matric Num: " << matric << endl;
 	cout << "Course Taken: " << endl << endl;
+	cin.ignore();
 	course.displayListG();
 }
 
