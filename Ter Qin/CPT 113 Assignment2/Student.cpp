@@ -25,9 +25,26 @@ void Student::displayUnits()
 {
 	int units = course.getTotalUnit();
 	cout << "Name: " << name << endl;
-	cout << "Matric Num: " << matric << endl;
+	cout << "Matric Num: " << matric << endl << endl;
 	cout << "Total Units Taken: " << units << endl;
 
+	//if (units < 15)
+		//cout << "Minimum units should be 15 units!" << endl;
+}
+
+void Student::displayDetailsGPA()
+{
+	cout << "Name: " << name << endl;
+	cout << "Matric Num: " << matric << endl;
+	cout << "Course Taken: " << endl << endl;
+	course.displayListG();
+}
+
+void Student::displayCGPA()
+{
+	int units = course.getTotalUnit();
+	double GP = course.getGP();
+	cout << "Total CGPA: " << (GP / units) << endl;
 }
 
 void Student::setName(string n)

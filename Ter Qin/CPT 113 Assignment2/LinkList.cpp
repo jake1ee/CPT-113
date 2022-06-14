@@ -50,6 +50,28 @@ void LinkList<Course>::displayListC()
 	}
 }
 
+void LinkList<Course>::displayListG()
+{
+	Course add;
+	ListNode<Course>* nodePtr;
+	// To move through the list
+	// Position nodePtr at the head of the list.
+	nodePtr = head;
+	string grade;
+	// While nodePtr points to a node, traverse the list.
+	while (nodePtr)
+	{
+		// Display the value in this node.
+		nodePtr->value.displayCourse();
+		cout << "Course Grade: ";
+		getline(cin, grade);
+		add.setGrade(grade);
+		cout << endl;
+		// Move to the next node.
+		nodePtr = nodePtr->next;
+	}
+}
+
 int LinkList<Course>::getTotalUnit()
 {
 	ListNode<Course>* nodePtr;
@@ -60,13 +82,29 @@ int LinkList<Course>::getTotalUnit()
 	// While nodePtr points to a node, traverse the list.
 	while (nodePtr)
 	{
-		totalUnit = totalUnit + nodePtr->value.getUnit();
+		totalUnit += nodePtr->value.getUnit();
 		// Move to the next node.
 		nodePtr = nodePtr->next;
 	}
 	return totalUnit;
 }
 
+double LinkList<Course>::getGP()
+{
+	ListNode<Course>* nodePtr;
+	// To move through the list
+	// Position nodePtr at the head of the list.
+	nodePtr = head;
+	double totalGP = 0.0;
+	// While nodePtr points to a node, traverse the list.
+	while (nodePtr)
+	{
+		totalGP += (nodePtr->value.getUnit() * nodePtr->value.getGrade());
+		// Move to the next node.
+		nodePtr = nodePtr->next;
+	}
+	return totalGP;
+}
 //*****************************************************
 // The deleteNode function searches for a node *
 // with searchValue as its value. The node, if found, *

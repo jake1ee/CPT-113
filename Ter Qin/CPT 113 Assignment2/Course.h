@@ -13,7 +13,7 @@ public:
 	{
 		CourseCode = "";
 		CourseUnit = NULL;
-		grade = NULL;
+		grade = "";
 	}
 
 	void displayCourse()
@@ -27,7 +27,7 @@ public:
 		CourseCode = code;
 		CourseUnit = unit;
 	}
-	void setGrade(int g)
+	void setGrade(string g)
 	{
 		grade = g;
 	}
@@ -44,7 +44,33 @@ public:
 
 	double getGrade()
 	{
-		return grade;
+		if (grade == "A" || grade == "a")
+			gp = 4.00;
+		else if (grade == "A-" || grade == "a-")
+			gp = 3.67;
+		else if (grade == "B+" || grade == "b+")
+			gp = 3.33;
+		else if (grade == "B" || grade == "b")
+			gp = 3.00;
+		else if (grade == "B-" || grade == "b-")
+			gp = 2.67;
+		else if (grade == "C+" || grade == "c+")
+			gp = 2.33;
+		else if (grade == "C" || grade == "c")
+			gp = 2.00;
+		else if (grade == "C-" || grade == "c-")
+			gp = 1.67;
+		else if (grade == "D+" || grade == "d+")
+			gp = 1.33;
+		else if (grade == "D" || grade == "d")
+			gp = 1.00;
+		else if (grade == "D-" || grade == "d-")
+			gp = 0.67;
+		else if (grade == "F" || grade == "f")
+			gp = 0.00;
+		else
+			cout << "Grade not identified!" << endl;
+		return gp;
 	}
 
 	bool operator ==(const Course& right)
@@ -63,9 +89,9 @@ public:
 	}
 
 private:
-	string CourseCode;
+	string CourseCode, grade;
 	int CourseUnit;
-	double grade;
+	double gp;
 
 };
 

@@ -58,9 +58,11 @@ public:
 	void appendNode(Course, int&); //to add node
 	void deleteNode(Course, int&); //to delete node
 	void displayListC(); //to display all nodes
+	void displayListG(); //to display all nodes
 	void WriteCourse(string, int, int); // to wtite the Student Info to txt file
 	void setSame(const LinkList<Course>&);
 	int getTotalUnit();
+	double getGP();
 
 
 	void displayListS();

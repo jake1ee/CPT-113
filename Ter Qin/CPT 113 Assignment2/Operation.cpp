@@ -195,6 +195,32 @@ void CalUnit(Student*& student, int size)
 	}
 }
 
+void CalCGPA(Student*& student, int size)
+{
+	Student Temp;
+	Course addG;	//add grade
+	string grade;
+	bool same = false;
+	getInput(Temp);
+	for (int i = 0; i < size; i++)
+	{
+		if (student[i] == Temp)
+		{
+			Temp = student[i];
+			same = true;
+		}
+	}
+	if (same)
+	{
+		Temp.displayDetailsGPA();
+
+			Temp.displayCGPA();
+	}
+	else
+	{
+		cout << "Student Not Found." << endl;
+	}
+}
 
 void menu() {
 	int option = 0;
@@ -291,6 +317,7 @@ void start()
 			CalUnit(student, size);
 			break;
 		case 5:
+			CalCGPA(student, size);
 			break;
 		case 6:
 			cout << "Thank You For Using The Program." << endl;

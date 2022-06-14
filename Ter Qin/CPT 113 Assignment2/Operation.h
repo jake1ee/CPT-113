@@ -12,6 +12,6 @@ void Registration(Student*&, int);
 void displayStudent(Student*&, int);
 void StudentSameCourse(Student*&, int);
 void CalUnit(Student*&, int);
-
+void CalCGPA(Student*&, int);
 
 #endif // !OPERATION_H
