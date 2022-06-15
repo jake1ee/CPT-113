@@ -14,7 +14,6 @@ public:
 		CourseCode = "";
 		CourseUnit = NULL;
 		grade = "";
-		gp = 0.0;
 	}
 
 	void displayCourse()
@@ -31,7 +30,6 @@ public:
 	void setGrade(string g)
 	{
 		grade = g;
-		GradePoint();
 	}
 
 	string getCode()
@@ -44,39 +42,6 @@ public:
 		return CourseUnit;
 	}
 
-	void GradePoint()
-	{
-		if (grade == "A")
-			gp = 4.00;
-		else if (grade == "A-")
-			gp = 3.67;
-		else if (grade == "B+")
-			gp = 3.33;
-		else if (grade == "B")
-			gp = 3.00;
-		else if (grade == "B-")
-			gp = 2.67;
-		else if (grade == "C+")
-			gp = 2.33;
-		else if (grade == "C")
-			gp = 2.00;
-		else if (grade == "C-")
-			gp = 1.67;
-		else if (grade == "D+")
-			gp = 1.33;
-		else if (grade == "D")
-			gp = 1.00;
-		else if (grade == "D-")
-			gp = 0.67;
-		else
-			gp = 0.00;
-	}
-
-	double getGradePoint()
-	{
-		return gp;
-	}
-
 	bool operator ==(const Course& right)
 	{
 		if (this->CourseCode == right.CourseCode && this->CourseUnit == right.CourseUnit)
@@ -84,8 +49,6 @@ public:
 		else
 			return false;
 	}
-
-
 
 	void operator =(const Course& right)
 	{
@@ -97,8 +60,6 @@ public:
 private:
 	string CourseCode, grade;
 	int CourseUnit;
-	double gp;
-
 };
 
 

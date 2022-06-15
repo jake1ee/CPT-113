@@ -1,5 +1,30 @@
 #include"LinkList.h"
 
+double getPoint(string grade)
+{
+	if (grade == "A+")
+		return 4;
+	else if (grade == "A")
+		return 3.75;
+	else if (grade == "B+")
+		return 3.5;
+	else if (grade == "B")
+		return 3;
+	else if (grade == "C+")
+		return 2.5;
+	else if (grade == "C")
+		return 2.0;
+	else if (grade == "D+")
+		return 1.5;
+	else if (grade == "D")
+		return 1;
+	else if (grade == "F")
+		return 0;
+	else
+		return -1;
+}
+
+
 //**************************************************
 // appendNode appends a node containing the value *
 // pased into newValue, to the end of the list. *
@@ -50,27 +75,28 @@ void LinkList<Course>::displayListC()
 	}
 }
 
-void LinkList<Course>::displayListG()
+void LinkList<Course>::keyInGrade(double &totalpoint)
 {
-	Course add;
 	ListNode<Course>* nodePtr;
 	// To move through the list
 	// Position nodePtr at the head of the list.
 	nodePtr = head;
-	int numC = 0;
+	double gradepoint;
 	string grade;
 	// While nodePtr points to a node, traverse the list.
 	while (nodePtr)
 	{
-		LinkList<Course> list;
-		// Display the value in this node.
 		nodePtr->value.displayCourse();
-		cout << "Course Grade: ";
-		getline(cin, grade);
-		add.setGrade(grade);
-		list.appendNode(add, numC);
+		do
+		{
+			cout << "Grade: ";
+			cin >> grade;
+			gradepoint = getPoint(grade);
+			if (gradepoint == -1)
+				cout << "Invalid Input Please Enter Again" << endl;
+		} while (gradepoint == -1);
 		cout << endl;
-		// Move to the next node.
+		totalpoint += gradepoint*nodePtr->value.getUnit();
 		nodePtr = nodePtr->next;
 	}
 }
@@ -92,24 +118,6 @@ int LinkList<Course>::getTotalUnit()
 	return totalUnit;
 }
 
-double LinkList<Course>::getGP()
-{
-	ListNode<Course>* nodePtr;
-	// To move through the list
-	// Position nodePtr at the head of the list.
-	nodePtr = head;
-	double totalGP = 0.0;
-	// While nodePtr points to a node, traverse the list.
-	while (nodePtr)
-	{
-		cout << nodePtr->value.getGradePoint() << endl;
-		cout << nodePtr->value.getUnit() << endl;
-		totalGP = totalGP + (nodePtr->value.getUnit() * nodePtr->value.getGradePoint());
-		// Move to the next node.
-		nodePtr = nodePtr->next;
-	}
-	return totalGP;
-}
 //*****************************************************
 // The deleteNode function searches for a node *
 // with searchValue as its value. The node, if found, *
@@ -160,34 +168,6 @@ void LinkList<Course>::deleteNode(Course searchValue, int& numCourse)
 		}
 	}
 }
-//
-//bool LinkList<Course>::searchNode(Course searchValue)
-//{
-//	ListNode<Course>* nodePtr; // To traverse
-//	ListNode<Course>* previousNode; // To point to
-//	// If the list is empty, do nothing.
-//	if (!head)
-//		cout << "List is Empty\n";
-//	// Determine if the first node is the one.
-//
-//		// Initialize nodePtr to head of list
-//	nodePtr = head;
-//	// Skip all nodes whose value member is not equal to IC.
-//	while (nodePtr != NULL && !(nodePtr->value == searchValue))
-//	{
-//		previousNode = nodePtr;
-//		nodePtr = nodePtr->next;
-//	}
-//	// If nodePtr is not at the end of the list,
-//	// link the previous node to the node after
-//	// nodePtr, then delete nodePtr.
-//	if (nodePtr)
-//	{
-//		return true;
-//	}
-//	return false;
-//
-//}
 
 void LinkList<Course>::WriteCourse(string name, int num, int numCourse)
 {

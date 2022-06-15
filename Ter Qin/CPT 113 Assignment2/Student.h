@@ -14,10 +14,9 @@ private:
 public:
 	Student();
 	void reset();
+	void Grade();
 	void displayDetails();
-	void displayDetailsGPA();
 	void displayUnits();
-	void displayCGPA();
 	void setName(string);
 	void setMatric(int);
 	void setStudentCourse(Course&);

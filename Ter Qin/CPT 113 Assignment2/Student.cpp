@@ -1,4 +1,5 @@
 #include "Student.h"
+#include<iomanip>
 
 Student::Student()
 {
@@ -32,20 +33,13 @@ void Student::displayUnits()
 		//cout << "Minimum units should be 15 units!" << endl;
 }
 
-void Student::displayDetailsGPA()
+void Student::Grade()
 {
-	cout << "Name: " << name << endl;
-	cout << "Matric Num: " << matric << endl;
-	cout << "Course Taken: " << endl << endl;
-	cin.ignore();
-	course.displayListG();
-}
-
-void Student::displayCGPA()
-{
-	int units = course.getTotalUnit();
-	double GP = course.getGP();
-	cout << "Total CGPA: " << (GP / units) << endl;
+	double point = 0;
+	int unit = course.getTotalUnit();
+	course.keyInGrade(point);
+	cout << fixed << setprecision(2);
+	cout << "CGPA: " << point / unit << endl;
 }
 
 void Student::setName(string n)

@@ -198,8 +198,6 @@ void CalUnit(Student*& student, int size)
 void CalCGPA(Student*& student, int size)
 {
 	Student Temp;
-	Course addG;	//add grade
-	string grade;
 	bool same = false;
 	getInput(Temp);
 	for (int i = 0; i < size; i++)
@@ -212,9 +210,7 @@ void CalCGPA(Student*& student, int size)
 	}
 	if (same)
 	{
-		Temp.displayDetailsGPA();
-
-			Temp.displayCGPA();
+		Temp.Grade();
 	}
 	else
 	{
