@@ -2,22 +2,28 @@
 
 double getPoint(string grade)
 {
-	if (grade == "A+")
-		return 4;
-	else if (grade == "A")
+	if (grade == "A")
+		return 4.00;
+	else if (grade == "A-")
 		return 3.75;
 	else if (grade == "B+")
-		return 3.5;
+		return 3.33;
 	else if (grade == "B")
-		return 3;
+		return 3.00;
+	else if (grade == "B-")
+		return 2.67;
 	else if (grade == "C+")
-		return 2.5;
+		return 2.33;
 	else if (grade == "C")
-		return 2.0;
+		return 2.00;
+	else if (grade == "C-")
+		return 1.67;
 	else if (grade == "D+")
-		return 1.5;
+		return 1.33;
 	else if (grade == "D")
 		return 1;
+	else if (grade == "D-")
+		return 0.67;
 	else if (grade == "F")
 		return 0;
 	else

@@ -35,11 +35,15 @@ void Student::displayUnits()
 
 void Student::Grade()
 {
-	double point = 0;
+	double point = 0.0;
 	int unit = course.getTotalUnit();
 	course.keyInGrade(point);
 	cout << fixed << setprecision(2);
-	cout << "CGPA: " << point / unit << endl;
+	cout << "Total CGPA: " << point / unit << endl;
+	if ((point / unit) <= 2.00)
+		cout << "Unfortunately,  you have failed this semester!" << endl;
+	else
+		cout << "Congratulations! Good luck in the next semester!" << endl;
 }
 
 void Student::setName(string n)

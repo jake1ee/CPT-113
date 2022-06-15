@@ -12,6 +12,11 @@ void getInput(Student& student)
 	getline(cin, name);
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
+	do {
+		cout << "Invalid input." << endl;
+		cout << "Please Enter Your Matric Number :";
+		cin >> matric;
+	} while (matric > 999999);
 	student.setName(name);
 	student.setMatric(matric);
 }
@@ -227,6 +232,7 @@ void menu() {
 	cout << "88  88  88 88.     88  V888 88b..d88 " << endl;
 	cout << "YP  YP  YP Y88888P VP   V8P  Y8888P  " << endl;
 	cout << endl;
+	cout << "---------------------------------------------------------------" << endl;
 	cout << " Registration System For Computer Science Student \n ";
 	cout << "1. Course Registration \n "
 		<< "2. Display Student Details \n "
@@ -234,6 +240,7 @@ void menu() {
 		<< "4. Calculate total unit by semester \n "
 		<< "5. Calculate CGPA \n "
 		<< "6. Exit \n \n ";
+	cout << "---------------------------------------------------------------" << endl;
 	cout << endl << endl;;
 }
 
@@ -292,7 +299,6 @@ void start()
 	int choice;
 	do
 	{
-		
 		menu();
 		cout << "Please choose an option: ";
 		cin >> choice;
