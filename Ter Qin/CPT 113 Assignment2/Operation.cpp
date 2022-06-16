@@ -3,13 +3,9 @@
 
 void getInput(Student& student)		//prompt user for name and matric in Registration
 {
-	system("cls");
-	string name;
 	int matric;
 	bool same = false;
 	cin.get();
-	cout << "Please Enter Your Name :";
-	getline(cin, name);
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
 	while (matric > 999999) 
@@ -18,26 +14,9 @@ void getInput(Student& student)		//prompt user for name and matric in Registrati
 		cout << "Please Enter Your Matric Number :";
 		cin >> matric;
 	}
-	student.setName(name);
 	student.setMatric(matric);
 }
 
-void getMatric(Student& student)		//prompt user for matric number and setting into student class
-{
-	system("cls");
-	int matric;
-	bool same = false;
-	cin.get();
-	cout << "Please Enter Your Matric Number :";
-	cin >> matric;
-	while (matric > 999999)
-	{
-		cout << "Invalid input." << endl;
-		cout << "Please Enter Your Matric Number :";
-		cin >> matric;
-	}
-	student.setMatric(matric);
-}
 
 int getData(Student*& student)		//reading from txt file
 {
@@ -85,30 +64,30 @@ int getData(Student*& student)		//reading from txt file
 	return -1;
 }
 
-void Registration(Student*& student, int size)		//to register student and their courses
+bool Registration(Student*& student, int size)		//to register student and their courses
 {
 	Student temp;
 	getInput(temp);
 	bool same = false;
 	for (int i = 0; i < size; i++)
 	{
-		if (student[i] == temp)
+		if (temp == student[i])
 		{
-			cout << "Matric number already exist!" << endl;
+			temp.setName(student[i].getName());
 			same = true;
-			cout << "Press enter to continue.." << endl;
-			cin.ignore();
-			cin.get();
-			start();
 		}
+			
 	}
 
 	if (!same)
 	{
 		LinkList<Course> list;
 		Course add, Delete;
-		string code;
+		string code, name;
 		int choice = 1, numC = 0, unit;
+		cout << "Please Enter Your Name :";
+		getline(cin, name);
+		temp.setName(name);
 		do
 		{
 			switch (choice)
@@ -145,13 +124,19 @@ void Registration(Student*& student, int size)		//to register student and their 
 		} while (choice != 0);
 		list.WriteCourse(temp.getName(), temp.getMatric(), numC);
 		cout << "Registration Successful!" << endl;
+		return true;
+	}
+	else
+	{
+		cout << "Student (" << temp.getName() << ") with Matric Number " << temp.getMatric() << " Already Registered." << endl;
+		return false;
 	}
 }
 
 void displayStudent(Student*& student, int size)		//to display student according to matric number prompted
 {
 	Student temp;
-	getMatric(temp);
+	getInput(temp);
 	bool same = false;
 	for (int i = 0; i < size; i++)
 	{
@@ -206,7 +191,7 @@ void CalUnit(Student*& student, int size)		//to calculate student's total unit t
 {
 	Student Temp;
 	bool same = false;
-	getMatric(Temp);
+	getInput(Temp);
 	for (int i = 0; i < size; i++)
 	{
 		if (student[i] == Temp)
@@ -229,7 +214,7 @@ void CalCGPA(Student*& student, int size)		//to calculate student's CGPA at end 
 {
 	Student Temp;
 	bool same = false;
-	getMatric(Temp);
+	getInput(Temp);
 	for (int i = 0; i < size; i++)
 	{
 		if (student[i] == Temp)
@@ -250,9 +235,7 @@ void CalCGPA(Student*& student, int size)		//to calculate student's CGPA at end 
 
 void menu() {		//To display Start menu 
 	int option = 0;
-	cout << "Welcome to Year 1 Semester 2!" << endl;
-	cout << "Press enter to continue.." << endl;
-	cin.get();
+	cout << "Welcome to Year 1 Semester 2!" << endl << endl;
 	cout << ".88b  d88. d88888b d8b   db db    db " << endl;
 	cout << "88'YbdP`88 88'     888o  88 88    88 " << endl;
 	cout << "88  88  88 88ooooo 88V8o 88 88    88 " << endl;
@@ -287,8 +270,8 @@ void start()		//start function to prompt user to choose functions
 		switch (choice)
 		{
 		case 1:
-			Registration(student, size);
-			exit(EXIT_SUCCESS);
+			if (Registration(student, size))
+				exit(EXIT_SUCCESS);
 			break;
 		case 2:
 			displayStudent(student, size);
@@ -313,50 +296,3 @@ void start()		//start function to prompt user to choose functions
 		system("cls");
 	} while (choice != 6);
 }
-
-//int integer_optionValidation() {
-//	int integer = 0;
-//	int converttoint = 0;
-//	bool temporaryholder = 0;
-//	int userInput = 0;
-//	int a = 0;
-//
-//	do {
-//		cout << "Please choose an option: ";
-//		cin >>userInput;
-//		if (userInput==NULL) {
-//			cout << "Please enter an input." << endl;
-//			continue;
-//		}
-//		for (a = 0; a < userInput.length(); a++) {
-//			if (isdigit(userInput[a])) {
-//				integer++;
-//			}
-//		}
-//		if (integer == userInput.length()) {
-//			converttoint = stoi(userInput);
-//			temporaryholder = 1;
-//		}
-//		else {
-//			cout << "Invalid input.\n";
-//			cin.clear();
-//			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-//			temporaryholder = 0;
-//			integer = 0;
-//		}
-//	} while (temporaryholder = 0);
-//	return converttoint;
-//}
-
-//int optionValidation(int a, int b) {
-//	int optionEnter = 0;
-//	// Check whether the input entered is within the range 
-//	do {
-//		cout << "Please choose an option: ";
-//		cin >> optionEnter;
-//		if (optionEnter < a || optionEnter > b) {
-//			cout << "Out of range. Please enter between 1 to 6. \n";
-//		}
-//	} while (optionEnter < a || optionEnter > b);
-//	return optionEnter;
-//}

@@ -6,10 +6,9 @@
 void menu();
 void start();
 void getInput(Student&);
-void getMatric(Student&);
 int getData(Student*&);
 
-void Registration(Student*&, int);
+bool Registration(Student*&, int);
 void displayStudent(Student*&, int);
 void StudentSameCourse(Student*&, int);
 void CalUnit(Student*&, int);
