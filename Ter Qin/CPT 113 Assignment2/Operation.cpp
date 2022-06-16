@@ -1,27 +1,45 @@
 #include"Operation.h"
 #include<fstream>
 
-void getInput(Student& student)
+void getInput(Student& student)		//prompt user for name and matric in Registration
 {
 	system("cls");
-	string name, code;
-	int matric, unit = 0;
+	string name;
+	int matric;
 	bool same = false;
 	cin.get();
 	cout << "Please Enter Your Name :";
 	getline(cin, name);
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
-	do {
+	while (matric > 999999) 
+	{
 		cout << "Invalid input." << endl;
 		cout << "Please Enter Your Matric Number :";
 		cin >> matric;
-	} while (matric > 999999);
+	}
 	student.setName(name);
 	student.setMatric(matric);
 }
 
-int getData(Student*& student)
+void getMatric(Student& student)		//prompt user for matric number and setting into student class
+{
+	system("cls");
+	int matric;
+	bool same = false;
+	cin.get();
+	cout << "Please Enter Your Matric Number :";
+	cin >> matric;
+	while (matric > 999999)
+	{
+		cout << "Invalid input." << endl;
+		cout << "Please Enter Your Matric Number :";
+		cin >> matric;
+	}
+	student.setMatric(matric);
+}
+
+int getData(Student*& student)		//reading from txt file
 {
 	fstream file("Student.txt", ios::in);
 	if (file.is_open())
@@ -67,7 +85,7 @@ int getData(Student*& student)
 	return -1;
 }
 
-void Registration(Student*& student, int size)
+void Registration(Student*& student, int size)		//to register student and their courses
 {
 	Student temp;
 	getInput(temp);
@@ -75,7 +93,14 @@ void Registration(Student*& student, int size)
 	for (int i = 0; i < size; i++)
 	{
 		if (student[i] == temp)
+		{
+			cout << "Matric number already exist!" << endl;
 			same = true;
+			cout << "Press enter to continue.." << endl;
+			cin.ignore();
+			cin.get();
+			start();
+		}
 	}
 
 	if (!same)
@@ -90,9 +115,9 @@ void Registration(Student*& student, int size)
 			{
 			case 1:
 				cin.get();
-				cout << "Course Code: ";
+				cout << "Course Code (eg: ABC 123): ";
 				getline(cin, code);
-				cout << "Course Unit: ";
+				cout << "Course Unit (eg: 3): ";
 				cin >> unit;
 				add.setCourse(code, unit);
 				list.appendNode(add, numC);
@@ -100,9 +125,9 @@ void Registration(Student*& student, int size)
 			case 2:
 				list.displayListC();
 				cin.get();
-				cout << "Course Code: ";
+				cout << "Course Code (eg: ABC 123): ";
 				getline(cin, code);
-				cout << "Course Unit: ";
+				cout << "Course Unit (eg: 3): ";
 				cin >> unit;
 				Delete.setCourse(code, unit);
 				list.deleteNode(Delete, numC);
@@ -119,14 +144,14 @@ void Registration(Student*& student, int size)
 			system("cls");
 		} while (choice != 0);
 		list.WriteCourse(temp.getName(), temp.getMatric(), numC);
-		cout << "Registration Success" << endl;
+		cout << "Registration Successful!" << endl;
 	}
 }
 
-void displayStudent(Student*& student, int size)
+void displayStudent(Student*& student, int size)		//to display student according to matric number prompted
 {
 	Student temp;
-	getInput(temp);
+	getMatric(temp);
 	bool same = false;
 	for (int i = 0; i < size; i++)
 	{
@@ -148,16 +173,16 @@ void displayStudent(Student*& student, int size)
 }
 
 
-void StudentSameCourse(Student*& student, int size)
+void StudentSameCourse(Student*& student, int size)		//to search for any other students taking the same course
 {
 	system("cls");
 	LinkList<string> list;
 	string search;
 	int search2;
 	cin.get();
-	cout << "Please Enter Course Code: ";
+	cout << "Please Enter Course Code (eg: ABC 123): ";
 	getline(cin, search);
-	cout << "Please Enter Course Unit: ";
+	cout << "Please Enter Course Unit (eg: 3): ";
 	cin >> search2;
 	for (int i = 0; i < size; i++)
 	{
@@ -166,22 +191,22 @@ void StudentSameCourse(Student*& student, int size)
 	}
 	if (!list.empty())
 	{
-		cout << "The Student which take the course " << search << "/" << search2 << " is: " << endl;
+		cout << "The student(s) which are taking the course " << search << "/" << search2 << " is: " << endl;
 		list.displayList();
 		cout << endl;
 	}
 	else
 	{
-		cout << "No one take the course " << search << "/" << search2 << endl;
+		cout << "No one is taking the course " << search << "/" << search2 << endl;
 	}
 
 }
 
-void CalUnit(Student*& student, int size)
+void CalUnit(Student*& student, int size)		//to calculate student's total unit taken for the semester
 {
 	Student Temp;
 	bool same = false;
-	getInput(Temp);
+	getMatric(Temp);
 	for (int i = 0; i < size; i++)
 	{
 		if (student[i] == Temp)
@@ -200,11 +225,11 @@ void CalUnit(Student*& student, int size)
 	}
 }
 
-void CalCGPA(Student*& student, int size)
+void CalCGPA(Student*& student, int size)		//to calculate student's CGPA at end of semester
 {
 	Student Temp;
 	bool same = false;
-	getInput(Temp);
+	getMatric(Temp);
 	for (int i = 0; i < size; i++)
 	{
 		if (student[i] == Temp)
@@ -223,8 +248,11 @@ void CalCGPA(Student*& student, int size)
 	}
 }
 
-void menu() {
+void menu() {		//To display Start menu 
 	int option = 0;
+	cout << "Welcome to Year 1 Semester 2!" << endl;
+	cout << "Press enter to continue.." << endl;
+	cin.get();
 	cout << ".88b  d88. d88888b d8b   db db    db " << endl;
 	cout << "88'YbdP`88 88'     888o  88 88    88 " << endl;
 	cout << "88  88  88 88ooooo 88V8o 88 88    88 " << endl;
@@ -244,6 +272,47 @@ void menu() {
 	cout << endl << endl;;
 }
 
+
+void start()		//start function to prompt user to choose functions
+{
+	Student* student;
+	int size = getData(student);
+	int choice;
+	do
+	{
+		menu();
+		cout << "Please choose an option: ";
+		cin >> choice;
+
+		switch (choice)
+		{
+		case 1:
+			Registration(student, size);
+			exit(EXIT_SUCCESS);
+			break;
+		case 2:
+			displayStudent(student, size);
+			break;
+		case 3:
+			StudentSameCourse(student, size);
+			break;
+		case 4:
+			CalUnit(student, size);
+			break;
+		case 5:
+			CalCGPA(student, size);
+			break;
+		case 6:
+			cout << "Thank You For Using The Program." << endl;
+			break;
+		default:
+			cout << "Out of range. Please enter between 1 to 6. \n";
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (choice != 6);
+}
 
 //int integer_optionValidation() {
 //	int integer = 0;
@@ -291,44 +360,3 @@ void menu() {
 //	} while (optionEnter < a || optionEnter > b);
 //	return optionEnter;
 //}
-
-void start()
-{
-	Student* student;
-	int size = getData(student);
-	int choice;
-	do
-	{
-		menu();
-		cout << "Please choose an option: ";
-		cin >> choice;
-
-		switch (choice)
-		{
-		case 1:
-			Registration(student, size);
-			exit(EXIT_SUCCESS);
-			break;
-		case 2:
-			displayStudent(student, size);
-			break;
-		case 3:
-			StudentSameCourse(student, size);
-			break;
-		case 4:
-			CalUnit(student, size);
-			break;
-		case 5:
-			CalCGPA(student, size);
-			break;
-		case 6:
-			cout << "Thank You For Using The Program." << endl;
-			break;
-		default:
-			cout << "Out of range. Please enter between 1 to 6. \n";
-			break;
-		}
-		system("pause");
-		system("cls");
-	} while (choice != 6);
-}

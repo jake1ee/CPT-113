@@ -1,6 +1,6 @@
 #include"LinkList.h"
 
-double getPoint(string grade)
+double getPoint(string grade)	//get grade point 
 {
 	if (grade == "A")
 		return 4.00;
@@ -175,6 +175,7 @@ void LinkList<Course>::deleteNode(Course searchValue, int& numCourse)
 	}
 }
 
+//write course into txt file
 void LinkList<Course>::WriteCourse(string name, int num, int numCourse)
 {
 	fstream file("Student.txt", ios::app | ios::out);

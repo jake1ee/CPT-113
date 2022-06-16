@@ -16,33 +16,33 @@ public:
 		grade = "";
 	}
 
-	void displayCourse()
+	void displayCourse()	//to display course code and unit
 	{
 		cout << "Course Code: " << CourseCode << endl;
 		cout << "Course Unit: " << CourseUnit << endl;
 	}
 
-	void setCourse(string code = "", int unit = 0)
+	void setCourse(string code = "", int unit = 0)	//set course code and unit
 	{
 		CourseCode = code;
 		CourseUnit = unit;
 	}
-	void setGrade(string g)
+	void setGrade(string g)							//set course grade
 	{
 		grade = g;
 	}
 
-	string getCode()
+	string getCode()								//get course code
 	{
 		return CourseCode;
 	}
 
-	int getUnit()
+	int getUnit()									//get course unit
 	{
 		return CourseUnit;
 	}
 
-	bool operator ==(const Course& right)
+	bool operator ==(const Course& right)			
 	{
 		if (this->CourseCode == right.CourseCode && this->CourseUnit == right.CourseUnit)
 			return true;

@@ -6,6 +6,7 @@
 void menu();
 void start();
 void getInput(Student&);
+void getMatric(Student&);
 int getData(Student*&);
 
 void Registration(Student*&, int);
