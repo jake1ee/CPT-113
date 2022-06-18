@@ -4,8 +4,6 @@
 void getInput(Student& student)		//prompt user for name and matric in Registration
 {
 	int matric;
-	bool same = false;
-	cin.get();
 	cout << "Please Enter Your Matric Number :";
 	cin >> matric;
 	while (matric > 999999) 
@@ -76,24 +74,25 @@ bool Registration(Student*& student, int size)		//to register student and their 
 			temp.setName(student[i].getName());
 			same = true;
 		}
-			
+		
 	}
-
 	if (!same)
 	{
 		LinkList<Course> list;
+		char garbage;
 		Course add, Delete;
 		string code, name;
 		int choice = 1, numC = 0, unit;
+		cin.get();
 		cout << "Please Enter Your Name :";
 		getline(cin, name);
+		cout << name;
 		temp.setName(name);
 		do
 		{
 			switch (choice)
 			{
 			case 1:
-				cin.get();
 				cout << "Course Code (eg: ABC 123): ";
 				getline(cin, code);
 				cout << "Course Unit (eg: 3): ";
@@ -103,14 +102,12 @@ bool Registration(Student*& student, int size)		//to register student and their 
 				break;
 			case 2:
 				list.displayListC();
-				cin.get();
 				cout << "Course Code (eg: ABC 123): ";
 				getline(cin, code);
 				cout << "Course Unit (eg: 3): ";
 				cin >> unit;
 				Delete.setCourse(code, unit);
 				list.deleteNode(Delete, numC);
-
 				system("pause");
 				break;
 			default:
@@ -120,6 +117,7 @@ bool Registration(Student*& student, int size)		//to register student and their 
 			cout << "\n1. Add Course\n2. Delete Course\n0. Quit" << endl;
 			cout << "Choice: ";
 			cin >> choice;
+			cin.get();
 			system("cls");
 		} while (choice != 0);
 		list.WriteCourse(temp.getName(), temp.getMatric(), numC);
@@ -266,7 +264,7 @@ void start()		//start function to prompt user to choose functions
 		menu();
 		cout << "Please choose an option: ";
 		cin >> choice;
-
+		system("cls");
 		switch (choice)
 		{
 		case 1:
