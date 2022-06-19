@@ -79,17 +79,27 @@ bool Registration(Student*& student, int size)		//to register student and their 
 	if (!same)
 	{
 		LinkList<Course> list;
-		char garbage;
 		Course add, Delete;
 		string code, name;
 		int choice = 1, numC = 0, unit;
 		cin.get();
 		cout << "Please Enter Your Name :";
 		getline(cin, name);
-		cout << name;
 		temp.setName(name);
+		cout << "Course Code (eg: ABC 123): ";
+		getline(cin, code);
+		cout << "Course Unit (eg: 3): ";
+		cin >> unit;
+		add.setCourse(code, unit);
+		list.appendNode(add, numC);
 		do
 		{
+			cout << "\n1. Add Course\n2. Delete Course\n0. Quit" << endl;
+			cout << "Choice: ";
+			cin >> choice;
+			cin.get();
+			system("cls");
+
 			switch (choice)
 			{
 			case 1:
@@ -98,7 +108,14 @@ bool Registration(Student*& student, int size)		//to register student and their 
 				cout << "Course Unit (eg: 3): ";
 				cin >> unit;
 				add.setCourse(code, unit);
-				list.appendNode(add, numC);
+				if (list.searchNode(add))
+				{
+					cout << "The Course is already Registered" << endl;
+				}
+				else
+				{
+					list.appendNode(add, numC);
+				}
 				break;
 			case 2:
 				list.displayListC();
@@ -114,11 +131,6 @@ bool Registration(Student*& student, int size)		//to register student and their 
 				cout << "Invalid Choice: please try again" << endl;
 				break;
 			}
-			cout << "\n1. Add Course\n2. Delete Course\n0. Quit" << endl;
-			cout << "Choice: ";
-			cin >> choice;
-			cin.get();
-			system("cls");
 		} while (choice != 0);
 		list.WriteCourse(temp.getName(), temp.getMatric(), numC);
 		cout << "Registration Successful!" << endl;

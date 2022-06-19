@@ -1,3 +1,14 @@
-﻿  Operation.cpp
-C:\Users\A C E R\Desktop\CPT-113\Ter Qin\CPT 113 Assignment2\Operation.cpp(82,8): warning C4101: 'garbage': unreferenced local variable
+﻿  Student.cpp
+C:\Users\A C E R\Desktop\CPT-113\Ter Qin\CPT 113 Assignment2\LinkList.h(201,15): warning C4101: 'previousNode': unreferenced local variable
+C:\Users\A C E R\Desktop\CPT-113\Ter Qin\CPT 113 Assignment2\LinkList.h(198): message : while compiling class template member function 'bool LinkList<Course>::searchNode(T)'
+          with
+          [
+              T=Course
+          ]
+C:\Users\A C E R\Desktop\CPT-113\Ter Qin\CPT 113 Assignment2\Student.cpp(71): message : see reference to function template instantiation 'bool LinkList<Course>::searchNode(T)' being compiled
+          with
+          [
+              T=Course
+          ]
+C:\Users\A C E R\Desktop\CPT-113\Ter Qin\CPT 113 Assignment2\Student.h(12): message : see reference to class template instantiation 'LinkList<Course>' being compiled
   CPT 113 Assignment2.vcxproj -> C:\Users\A C E R\Desktop\CPT-113\Ter Qin\x64\Debug\CPT 113 Assignment2.exe

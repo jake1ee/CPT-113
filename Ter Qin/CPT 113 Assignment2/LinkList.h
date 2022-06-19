@@ -196,27 +196,24 @@ void LinkList<T>::insertNode(T newValue)
 template<class T>
 bool LinkList<T>::searchNode(T searchValue)
 {
-	ListNode<T>* nodePtr; // To traverse
+	// Initialize nodePtr to head of list
+	ListNode<T>* nodePtr = head;// To traverse
 	ListNode<T>* previousNode; // To point to
 	// If the list is empty, do nothing.
-	if (!head)
+	if (!nodePtr)
+	{
 		cout << "List is Empty\n";
-	// Determine if the first node is the one.
-
-		// Initialize nodePtr to head of list
-	nodePtr = head;
-	// Skip all nodes whose value member is not equal to IC.
-	while (nodePtr != NULL && !(nodePtr->value == searchValue))
-	{
-		previousNode = nodePtr;
-		nodePtr = nodePtr->next;
 	}
-	// If nodePtr is not at the end of the list,
-	// link the previous node to the node after
-	// nodePtr, then delete nodePtr.
-	if (nodePtr)
+	else
 	{
-		return true;
+		while (nodePtr!=NULL)
+		{
+			if (nodePtr->value == searchValue)
+			{
+				return true;
+			}
+			nodePtr = nodePtr->next;
+		}
 	}
 	return false;
 
