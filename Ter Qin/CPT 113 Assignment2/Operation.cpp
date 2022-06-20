@@ -118,6 +118,8 @@ bool Registration(Student*& student, int size)		//to register student and their 
 				}
 				break;
 			case 2:
+				cout << "---------------------------------------------------------------" << endl;
+				cout << "Please enter course details that you wish to delete" << endl;
 				list.displayListC();
 				cout << "Course Code (eg: ABC 123): ";
 				getline(cin, code);
