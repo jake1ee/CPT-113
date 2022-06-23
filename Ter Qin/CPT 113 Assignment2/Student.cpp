@@ -100,13 +100,3 @@ void Student::operator=(const Student& right)
 	this->matric = right.matric;
 	this->course.setSame(right.course);
 }
-
-void LinkList<Student>::displayListS()
-{
-	ListNode<Student>* nodeptr = head;
-	while (nodeptr)
-	{
-		nodeptr->value.displayDetails();
-		nodeptr = nodeptr->next;
-	}
-}

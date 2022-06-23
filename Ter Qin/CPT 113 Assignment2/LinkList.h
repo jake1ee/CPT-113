@@ -49,7 +49,6 @@ public:
 	// Linked list operations
 	// For Template Type of data
 	void appendNode(T); //to add node
-	void insertNode(T); //to insert node
 	void deleteNode(T); //to delete node
 	bool searchNode(T); //to search node
 	void displayList() const; //to display all nodes
@@ -63,7 +62,6 @@ public:
 	void setSame(const LinkList<Course>&);
 	int getTotalUnit();
 
-	void displayListS();
 };
 
 //****************************************
@@ -142,54 +140,6 @@ void LinkList<T>::displayList()  const
 		}
 		// Move to the next node.
 		nodePtr = nodePtr->next;
-	}
-}
-
-//**************************************************
-// The insertNode function inserts a node with. *
-// newValue copied to its value member. *
-//**************************************************
-
-template <class T>
-void LinkList<T>::insertNode(T newValue)
-{
-	ListNode<T>* newNode;
-	ListNode<T>* nodePtr;
-	ListNode<T>* previousNode = NULL;
-	// The previous
-	// Allocate a new node and store newValue there.
-	newNode = new ListNode<T>(newValue);
-	// If there are no nodes in the list
-	// make newNode the first node
-	if (!head)
-	{
-		head = newNode;
-		newNode->next = NULL;
-	}
-	else // Otherwise, insert newNode
-	{
-		// Position nodePtr at the head of list.
-		nodePtr = head;
-		// Initialize previousNode to nullptr.
-		previousNode = NULL;
-		// A new node
-		// To traverse the list node
-		// Skip all nodes whose value is less than newValue.
-		while (nodePtr != NULL && nodePtr->value.getIC() < newValue.getIC()) // method in PersonInfo
-		{
-		}
-		// If the new node is to be the 1st in the list,
-		// insert it before all other nodes.
-		if (previousNode == NULL)
-		{
-			head = newNode;
-			newNode->next = nodePtr;
-		}
-		else // Otherwise insert after the previous node.
-		{
-			previousNode->next = newNode;
-			newNode->next = nodePtr;
-		}
 	}
 }
 
